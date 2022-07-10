@@ -14,12 +14,12 @@ export default function AddDog(props) {
                         <p className="text-center mb-5">Listing your dogs on our website reaches a bigger target audience and helps them find a FUR-ever home!</p>
                         <Form>
                             <h4 className="mb-4 text-decoration-underline">Dog Details:</h4>
-                            <Form.Group className="mb-4" controlId="formGroupDogName">
+                            <Form.Group className="mb-4" controlId='dogName'>
                                 <Form.Label>Dog's Name</Form.Label>
-                                <Form.Control name="newDogName" value={props.newDogName} onChange={props.updateFormField} />
+                                <Form.Control name="dogName" value={props.dogName} onChange={props.updateFormField} />
                             </Form.Group>
 
-                            <Form.Group className="mb-4" controlId="formGroupBreed">
+                            <Form.Group className="mb-4" controlId='breed'>
                                 <Form.Label>Breed</Form.Label>
                                 <Form.Select aria-label="Default select example">
                                     <option>Select a breed</option>
@@ -32,12 +32,14 @@ export default function AddDog(props) {
                             <Form.Group className="mb-4">
                                 <Form.Label>Gender</Form.Label>
                                 {['radio'].map((type) => (
-                                    <div key={`inline-${type}`} className="mb-3">
+                                    <div key={`inline-${type}`}>
                                         <Form.Check
                                             inline
                                             label="Male"
                                             value="male"
-                                            name="group1"
+                                            name="gender"
+                                            checked={props.gender === 'male'}
+                                            onChange={props.updateFormField}
                                             type={type}
                                             id={`inline-${type}-1`}
                                         />
@@ -45,7 +47,9 @@ export default function AddDog(props) {
                                             inline
                                             label="Female"
                                             value="female"
-                                            name="group1"
+                                            name="gender"
+                                            checked={props.gender === 'female'}
+                                            onChange={props.updateFormField}
                                             type={type}
                                             id={`inline-${type}-2`}
                                         />
@@ -53,9 +57,9 @@ export default function AddDog(props) {
                                 ))}
                             </Form.Group>
 
-                            <Form.Group className="mb-4" controlId="formGroupDogName">
+                            <Form.Group className="mb-4" controlId='dateOfBirth'>
                                 <Form.Label>Estimated Date of Birth</Form.Label>
-                                <Form.Control type="date" name="newDogName" value={props.newDogName} onChange={props.updateFormField} />
+                                <Form.Control type="date" name="dateOfBirth" value={props.dateOfBirth} onChange={props.updateFormField} />
                             </Form.Group>
 
                             <Form.Group className="mb-4">
@@ -66,7 +70,7 @@ export default function AddDog(props) {
                                             inline
                                             label="Good-natured"
                                             value="good-natured"
-                                            name="group1"
+                                            name="temperament"
                                             type={type}
                                             id={`inline-${type}-1`}
                                         />
@@ -74,7 +78,7 @@ export default function AddDog(props) {
                                             inline
                                             label="Aggressive"
                                             value="aggressive"
-                                            name="group1"
+                                            name="temperament"
                                             type={type}
                                             id={`inline-${type}-2`}
                                         />
@@ -82,7 +86,7 @@ export default function AddDog(props) {
                                             inline
                                             label="Active"
                                             value="active"
-                                            name="group1"
+                                            name="temperament"
                                             type={type}
                                             id={`inline-${type}-3`}
                                         />
@@ -90,7 +94,7 @@ export default function AddDog(props) {
                                             inline
                                             label="Shy"
                                             value="shy"
-                                            name="group1"
+                                            name="temperament"
                                             type={type}
                                             id={`inline-${type}-4`}
                                         />
@@ -98,7 +102,7 @@ export default function AddDog(props) {
                                             inline
                                             label="Playful"
                                             value="playful"
-                                            name="group1"
+                                            name="temperament"
                                             type={type}
                                             id={`inline-${type}-5`}
                                         />
@@ -114,25 +118,28 @@ export default function AddDog(props) {
                                             inline
                                             label="Vaccinated"
                                             value="vaccinated"
-                                            name="group1"
+                                            name="healthStatus"
+                                            checked={props.healthStatus.includes('vaccinated')}
                                             type={type}
-                                            id={`inline-${type}-1`}
+                                            id={`inline-${type}-6`}
                                         />
                                         <Form.Check
                                             inline
                                             label="Sterilized"
                                             value="sterilized"
-                                            name="group1"
+                                            name="healthStatus"
+                                            checked={props.healthStatus.includes('sterilized')}
                                             type={type}
-                                            id={`inline-${type}-2`}
+                                            id={`inline-${type}-7`}
                                         />
                                         <Form.Check
                                             inline
                                             label="Microchipped"
                                             value="microchipped"
-                                            name="group1"
+                                            name="healthStatus"
+                                            checked={props.healthStatus.includes('microchipped')}
                                             type={type}
-                                            id={`inline-${type}-3`}
+                                            id={`inline-${type}-8`}
                                         />
                                     </div>
                                 ))}
@@ -146,25 +153,25 @@ export default function AddDog(props) {
                                             inline
                                             label="HDB approved"
                                             value="hdbApproved"
-                                            name="group1"
+                                            name="familyStatus"
                                             type={type}
-                                            id={`inline-${type}-1`}
+                                            id={`inline-${type}-9`}
                                         />
                                         <Form.Check
                                             inline
                                             label="Good with kids"
                                             value="goodWithKids"
-                                            name="group1"
+                                            name="familyStatus"
                                             type={type}
-                                            id={`inline-${type}-2`}
+                                            id={`inline-${type}-10`}
                                         />
                                         <Form.Check
                                             inline
                                             label="Good with other dogs"
                                             value="goodWithOtherDogs"
-                                            name="group1"
+                                            name="familyStatus"
                                             type={type}
-                                            id={`inline-${type}-3`}
+                                            id={`inline-${type}-11`}
                                         />
                                     </div>
                                 ))}
@@ -177,18 +184,22 @@ export default function AddDog(props) {
                                         <Form.Check
                                             inline
                                             label="Yes"
-                                            value="true"
-                                            name="group1"
+                                            value='true'
+                                            name="hypoallergenic"
+                                            checked={props.hypoallergenic === true}
+                                            onChange={props.updateBooleanFormField}
                                             type={type}
-                                            id={`inline-${type}-1`}
+                                            id={`inline-${type}-3`}
                                         />
                                         <Form.Check
                                             inline
                                             label="No"
-                                            value="false"
-                                            name="group1"
+                                            value='false'
+                                            name="hypoallergenic"
+                                            checked={props.hypoallergenic === false}
+                                            onChange={props.updateBooleanFormField}
                                             type={type}
-                                            id={`inline-${type}-2`}
+                                            id={`inline-${type}-4`}
                                         />
                                     </div>
                                 ))}
@@ -202,36 +213,45 @@ export default function AddDog(props) {
                                             inline
                                             label="Yes"
                                             value="true"
-                                            name="group1"
+                                            name="toiletTrained"
+                                            checked={props.toiletTrained === true}
+                                            onChange={props.updateBooleanFormField}
                                             type={type}
-                                            id={`inline-${type}-1`}
+                                            id={`inline-${type}-5`}
                                         />
                                         <Form.Check
                                             inline
                                             label="No"
                                             value="false"
-                                            name="group1"
+                                            name="toiletTrained"
+                                            checked={props.toiletTrained === false}
+                                            onChange={props.updateBooleanFormField}
                                             type={type}
-                                            id={`inline-${type}-2`}
+                                            id={`inline-${type}-6`}
                                         />
                                     </div>
                                 ))}
                             </Form.Group>
 
-                            <Form.Group className="mb-4" controlId="exampleForm.ControlTextarea1">
+                            <Form.Group className="mb-4" controlId="description">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control placeholder="Write a short description on your dog" as="textarea" rows={3} />
+                                <Form.Control placeholder="Write a short description on the dog" as="textarea" rows={3} name="description" value={props.description} onChange={props.updateFormField} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-5" controlId="pictureUrl">
+                                <Form.Label>Picture</Form.Label>
+                                <Form.Control placeholder="Upload a picture of the dog in URL format" name="pictureUrl" value={props.pictureUrl} onChange={props.updateFormField} />
                             </Form.Group>
 
                             <h4 className="mb-4 text-decoration-underline">Caretaker Details:</h4>
-                            <Form.Group className="mb-4" controlId="formGroupDogName">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control placeholder="Name of individual or organization" name="newOwnerName" value={props.newDogName} onChange={props.updateFormField} />
+                            <Form.Group className="mb-4" controlId="ownerName">
+                                <Form.Label>Your Name</Form.Label>
+                                <Form.Control placeholder="Name of individual or organization" name="ownerName" value={props.ownerName} onChange={props.updateFormField} />
                             </Form.Group>
 
-                            <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
+                            <Form.Group className="mb-4" controlId="email">
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" placeholder="name@example.com" />
+                                <Form.Control type="email" placeholder="name@example.com" name="email" value={props.email} onChange={props.updateFormField} />
                             </Form.Group>
 
                             <Button className="float-end" variant="info">Cancel</Button>{' '}

@@ -21,7 +21,18 @@ export default class Main extends React.Component {
                 description: "svfsdifndsiufsd dsiofjdsifjidsffdsf"
             }
         ],
-        newDogName: ""
+        dogName: "",
+        gender: "",
+        dateOfBirth: "",
+        hypoallergenic: "",
+        toiletTrained: "",
+        ownerName: "",
+        email: "",
+        description: "",
+        pictureUrl: "",
+        temperament: [],
+        healthStatus: [],
+        familyStatus: []
     }
 
     async componentDidMount() {
@@ -35,6 +46,12 @@ export default class Main extends React.Component {
         this.setState({
             [e.target.name]: e.target.value
         });
+    }
+
+    updateBooleanFormField = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value === 'true'? true : false
+        })
     }
 
     addNew = () => {
@@ -68,8 +85,17 @@ export default class Main extends React.Component {
                         setActive={this.setActive}
                     />
                     <AddDog
-                        newDogName={this.state.newDogName}
+                        dogName={this.state.dogName}
+                        gender={this.state.gender}
+                        dateOfBirth={this.state.dateOfBirth}
                         updateFormField={this.updateFormField}
+                        updateBooleanFormField={this.updateBooleanFormField}
+                        hypoallergenic={this.state.hypoallergenic}
+                        toiletTrained={this.state.toiletTrained}
+                        ownerName={this.state.ownerName}
+                        email={this.state.email}
+                        description={this.state.description}
+                        pictureUrl={this.state.pictureUrl}
                     />
                 </React.Fragment>
             )
