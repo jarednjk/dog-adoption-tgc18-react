@@ -22,17 +22,18 @@ export default class Main extends React.Component {
             }
         ],
         dogName: "",
+        breed: "",
         gender: "",
         dateOfBirth: "",
-        hypoallergenic: "",
-        toiletTrained: "",
-        ownerName: "",
-        email: "",
-        description: "",
-        pictureUrl: "",
         temperament: [],
         healthStatus: [],
-        familyStatus: []
+        familyStatus: [],
+        hypoallergenic: "",
+        toiletTrained: "",
+        description: "",
+        pictureUrl: "",
+        ownerName: "",
+        email: ""
     }
 
     async componentDidMount() {
@@ -52,6 +53,31 @@ export default class Main extends React.Component {
         this.setState({
             [e.target.name]: e.target.value === 'true'? true : false
         })
+    }
+
+    updateCheckbox = (e) => {
+        // user unchecking checkbox
+        // let currentValue = thisState[e.target.name]
+        if (this.state[e.target.name].includes(e.target.value)) {
+            let index = this.state[e.target.name].indexOf(e.target.value);
+            // cloned the array
+            let cloned = this.state[e.target.name].slice(0);
+            // modify the array
+            cloned.splice(index, 1)
+            // cloned = [...cloned.slice(0, index), ...cloned.slice(index+1)];
+            // replace original array in state with cloned
+            this.setState({
+                [e.target.name]: cloned
+            });
+        } else {
+            let cloned = this.state[e.target.name].slice(0);
+            // cloned = [...cloned, e.target.value];
+            cloned.push(e.target.value)
+            
+            this.setState({
+                [e.target.name]: cloned
+            });
+        }
     }
 
     addNew = () => {
@@ -86,16 +112,21 @@ export default class Main extends React.Component {
                     />
                     <AddDog
                         dogName={this.state.dogName}
+                        breed={this.state.breed}
                         gender={this.state.gender}
                         dateOfBirth={this.state.dateOfBirth}
-                        updateFormField={this.updateFormField}
-                        updateBooleanFormField={this.updateBooleanFormField}
+                        temperament={this.state.temperament}
+                        healthStatus={this.state.healthStatus}
+                        familyStatus={this.state.familyStatus}
                         hypoallergenic={this.state.hypoallergenic}
                         toiletTrained={this.state.toiletTrained}
-                        ownerName={this.state.ownerName}
-                        email={this.state.email}
                         description={this.state.description}
                         pictureUrl={this.state.pictureUrl}
+                        ownerName={this.state.ownerName}
+                        email={this.state.email}
+                        updateFormField={this.updateFormField}
+                        updateBooleanFormField={this.updateBooleanFormField}
+                        updateCheckbox={this.updateCheckbox}
                     />
                 </React.Fragment>
             )

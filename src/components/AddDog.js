@@ -71,6 +71,8 @@ export default function AddDog(props) {
                                             label="Good-natured"
                                             value="good-natured"
                                             name="temperament"
+                                            checked={props.temperament.includes('good-natured')}
+                                            onChange={props.updateCheckbox}
                                             type={type}
                                             id={`inline-${type}-1`}
                                         />
@@ -79,6 +81,8 @@ export default function AddDog(props) {
                                             label="Aggressive"
                                             value="aggressive"
                                             name="temperament"
+                                            checked={props.temperament.includes('aggressive')}
+                                            onChange={props.updateCheckbox}
                                             type={type}
                                             id={`inline-${type}-2`}
                                         />
@@ -87,6 +91,8 @@ export default function AddDog(props) {
                                             label="Active"
                                             value="active"
                                             name="temperament"
+                                            checked={props.temperament.includes('active')}
+                                            onChange={props.updateCheckbox}
                                             type={type}
                                             id={`inline-${type}-3`}
                                         />
@@ -95,6 +101,8 @@ export default function AddDog(props) {
                                             label="Shy"
                                             value="shy"
                                             name="temperament"
+                                            checked={props.temperament.includes('shy')}
+                                            onChange={props.updateCheckbox}
                                             type={type}
                                             id={`inline-${type}-4`}
                                         />
@@ -103,6 +111,8 @@ export default function AddDog(props) {
                                             label="Playful"
                                             value="playful"
                                             name="temperament"
+                                            checked={props.temperament.includes('playful')}
+                                            onChange={props.updateCheckbox}
                                             type={type}
                                             id={`inline-${type}-5`}
                                         />
@@ -120,6 +130,7 @@ export default function AddDog(props) {
                                             value="vaccinated"
                                             name="healthStatus"
                                             checked={props.healthStatus.includes('vaccinated')}
+                                            onChange={props.updateCheckbox}
                                             type={type}
                                             id={`inline-${type}-6`}
                                         />
@@ -129,6 +140,7 @@ export default function AddDog(props) {
                                             value="sterilized"
                                             name="healthStatus"
                                             checked={props.healthStatus.includes('sterilized')}
+                                            onChange={props.updateCheckbox}
                                             type={type}
                                             id={`inline-${type}-7`}
                                         />
@@ -138,6 +150,7 @@ export default function AddDog(props) {
                                             value="microchipped"
                                             name="healthStatus"
                                             checked={props.healthStatus.includes('microchipped')}
+                                            onChange={props.updateCheckbox}
                                             type={type}
                                             id={`inline-${type}-8`}
                                         />
@@ -154,6 +167,8 @@ export default function AddDog(props) {
                                             label="HDB approved"
                                             value="hdbApproved"
                                             name="familyStatus"
+                                            checked={props.familyStatus.includes('hdbApproved')}
+                                            onChange={props.updateCheckbox}
                                             type={type}
                                             id={`inline-${type}-9`}
                                         />
@@ -162,6 +177,8 @@ export default function AddDog(props) {
                                             label="Good with kids"
                                             value="goodWithKids"
                                             name="familyStatus"
+                                            checked={props.familyStatus.includes('goodWithKids')}
+                                            onChange={props.updateCheckbox}
                                             type={type}
                                             id={`inline-${type}-10`}
                                         />
@@ -170,6 +187,8 @@ export default function AddDog(props) {
                                             label="Good with other dogs"
                                             value="goodWithOtherDogs"
                                             name="familyStatus"
+                                            checked={props.familyStatus.includes('goodWithOtherDogs')}
+                                            onChange={props.updateCheckbox}
                                             type={type}
                                             id={`inline-${type}-11`}
                                         />
