@@ -3,10 +3,11 @@ import axios from 'axios';
 import Navigationbar from './Navigationbar';
 import Home from './Home';
 import Browse from './Browse';
+import AddDog from './AddDog';
 
 export default class Main extends React.Component {
 
-    url = "https://8888-jarednjk-dogadoptiontgc-e2h0d227p1k.ws-us53.gitpod.io/"
+    url = "https://8888-jarednjk-dogadoptiontgc-e2h0d227p1k.ws-us53.gitpod.io/";
 
     state = {
         active: 'home',
@@ -20,13 +21,24 @@ export default class Main extends React.Component {
                 description: "svfsdifndsiufsd dsiofjdsifjidsffdsf"
             }
         ],
+        newDogName: ""
     }
 
     async componentDidMount() {
-        let response = await axios.get( this.url + 'dog_adoption');
+        let response = await axios.get(this.url + 'dog_adoption');
         this.setState({
             data: response.data
         })
+    }
+
+    updateFormField = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    addNew = () => {
+        
     }
 
     renderContent() {
@@ -46,7 +58,19 @@ export default class Main extends React.Component {
                     <Navigationbar
                         setActive={this.setActive}
                     />
-                    <Browse data={this.state.data}/>
+                    <Browse data={this.state.data} />
+                </React.Fragment>
+            )
+        } else if (this.state.active === 'add dog') {
+            return (
+                <React.Fragment>
+                    <Navigationbar
+                        setActive={this.setActive}
+                    />
+                    <AddDog
+                        newDogName={this.state.newDogName}
+                        updateFormField={this.updateFormField}
+                    />
                 </React.Fragment>
             )
         }

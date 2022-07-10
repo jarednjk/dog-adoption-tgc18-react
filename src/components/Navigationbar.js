@@ -40,7 +40,9 @@ export default function Navigationbar(props) {
                             <Nav.Link onClick={ ()=>{
                                 props.setActive('browse')
                             } } >Browse</Nav.Link>
-                            <Nav.Link>Add Dog</Nav.Link>
+                            <Nav.Link onClick={ ()=>{
+                                props.setActive('add dog')
+                            } } >Add Dog</Nav.Link>
                             <Nav.Link>Manage</Nav.Link>
                             <Nav.Link>Adoption Process</Nav.Link>
                         </Nav>
