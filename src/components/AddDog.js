@@ -21,13 +21,18 @@ export default function AddDog(props) {
 
                             <Form.Group className="mb-4" controlId='breed'>
                                 <Form.Label>Breed</Form.Label>
+                                <Form.Control name="breed" value={props.breed} onChange={props.updateFormField} />
+                            </Form.Group>
+
+                            {/* <Form.Group className="mb-4" controlId='breed'>
+                                <Form.Label>Breed</Form.Label>
                                 <Form.Select aria-label="Default select example">
                                     <option>Select a breed</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
                                 </Form.Select>
-                            </Form.Group>
+                            </Form.Group> */}
 
                             <Form.Group className="mb-4">
                                 <Form.Label>Gender</Form.Label>
@@ -274,7 +279,7 @@ export default function AddDog(props) {
                             </Form.Group>
 
                             <Button className="float-end" variant="info">Cancel</Button>{' '}
-                            <Button className="float-end mx-2" variant="warning">Add</Button>{' '}
+                            <Button onClick={props.addNew} className="float-end mx-2" variant="warning">Add</Button>{' '}
 
 
                         </Form>

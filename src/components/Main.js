@@ -51,7 +51,7 @@ export default class Main extends React.Component {
 
     updateBooleanFormField = (e) => {
         this.setState({
-            [e.target.name]: e.target.value === 'true'? true : false
+            [e.target.name]: e.target.value === 'true' ? true : false
         })
     }
 
@@ -73,15 +73,61 @@ export default class Main extends React.Component {
             let cloned = this.state[e.target.name].slice(0);
             // cloned = [...cloned, e.target.value];
             cloned.push(e.target.value)
-            
+
             this.setState({
                 [e.target.name]: cloned
             });
         }
     }
 
-    addNew = () => {
-        
+    // Add new dog listing
+    addNew = async () => {
+        try {
+            let response = await axios.post(this.url + 'dog_adoption', {
+                dogName: this.state.dogName,
+                breed: this.state.breed,
+                gender: this.state.gender,
+                dateOfBirth: this.state.dateOfBirth,
+                temperament: this.state.temperament,
+                healthStatus: this.state.healthStatus,
+                familyStatus: this.state.familyStatus,
+                hypoallergenic: this.state.hypoallergenic,
+                toiletTrained: this.state.toiletTrained,
+                description: this.state.description,
+                pictureUrl: this.state.pictureUrl,
+                owner: {
+                    ownerName: this.state.ownerName,
+                    email: this.state.email
+                }
+    
+            })
+
+            let newDog = {
+                _id: response.data.insertedId,
+                dogName: this.state.dogName,
+                breed: this.state.breed,
+                gender: this.state.gender,
+                dateOfBirth: this.state.dateOfBirth,
+                temperament: this.state.temperament,
+                healthStatus: this.state.healthStatus,
+                familyStatus: this.state.familyStatus,
+                hypoallergenic: this.state.hypoallergenic,
+                toiletTrained: this.state.toiletTrained,
+                description: this.state.description,
+                pictureUrl: this.state.pictureUrl,
+                owner: {
+                    ownerName: this.state.ownerName,
+                    email: this.state.email
+                }
+            }
+
+            this.setState({
+                'data': [...this.state.data, newDog],
+                'active': 'browse'
+            })
+        } catch (e) {
+            alert('Error listing new dog. Please contact administrator.')
+        }
     }
 
     renderContent() {
@@ -127,6 +173,7 @@ export default class Main extends React.Component {
                         updateFormField={this.updateFormField}
                         updateBooleanFormField={this.updateBooleanFormField}
                         updateCheckbox={this.updateCheckbox}
+                        addNew={this.addNew}
                     />
                 </React.Fragment>
             )
