@@ -174,6 +174,7 @@ export default class Main extends React.Component {
                         updateBooleanFormField={this.updateBooleanFormField}
                         updateCheckbox={this.updateCheckbox}
                         addNew={this.addNew}
+                        setActive={this.setActive}
                     />
                 </React.Fragment>
             )

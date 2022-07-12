@@ -12,6 +12,15 @@ code {
     monospace;
 }
 
-.info {
-  color: brown !important;
+
+
+#card-img {
+  height: 300px;
+}
+
+/* for iPad-size and above */
+@media screen and (min-width: 768px) {
+  #card-img {
+    height: 250px;
+  }
 }

@@ -1,7 +1,12 @@
-import React from 'react';
-import { Form, Container, Row, Button, Card, Col } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Form, Container, Row, Button, Modal, Col } from 'react-bootstrap';
 
 export default function AddDog(props) {
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         <React.Fragment>
             <Container className="p-5">
@@ -278,8 +283,30 @@ export default function AddDog(props) {
                                 <Form.Control type="email" placeholder="name@example.com" name="email" value={props.email} onChange={props.updateFormField} />
                             </Form.Group>
 
-                            <Button className="float-end" variant="info">Cancel</Button>{' '}
+                            <Button onClick={handleShow} className="float-end" variant="info">Cancel</Button>{' '}
                             <Button onClick={props.addNew} className="float-end mx-2" variant="warning">Add</Button>{' '}
+
+                            <Modal
+                                show={show}
+                                onHide={handleClose}
+                                backdrop="static"
+                                keyboard={false}
+                            >
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Confirm Discard Changes</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <p>You've made changes that haven't been published yet</p>
+                                    <p>If you discard changes, your unpublished changes will be deleted.</p>
+                                    <p>You can't undo this action.</p>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button onClick={() => {props.setActive('browse')}} variant="danger">
+                                        Discard Changes
+                                    </Button>
+                                    <Button onClick={handleClose} variant="info">Continue Editing</Button>
+                                </Modal.Footer>
+                            </Modal>
 
 
                         </Form>
