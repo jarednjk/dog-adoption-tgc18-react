@@ -13,14 +13,18 @@ export default function Navigationbar(props) {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <Nav.Link onClick={ ()=>{
+                            <Nav.Link onClick={()=>{
                                 props.setActive('browse')
-                            } } >Browse</Nav.Link>
-                            <Nav.Link onClick={ ()=>{
+                            }} >Browse</Nav.Link>
+                            <Nav.Link onClick={()=>{
                                 props.setActive('add dog')
-                            } } >Add Dog</Nav.Link>
-                            <Nav.Link>Manage</Nav.Link>
-                            <Nav.Link>Adoption Process</Nav.Link>
+                            }} >Add Dog</Nav.Link>
+                            <Nav.Link onClick={()=>{
+                                props.setActive('manage')
+                            }}>Manage</Nav.Link>
+                            <Nav.Link onClick={()=>{
+                                props.setActive('adoptionProcess')
+                            }}>Adoption Process</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

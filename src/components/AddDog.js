@@ -7,6 +7,8 @@ export default function AddDog(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    console.log(props.dogNameError);    
+
     return (
         <React.Fragment>
             <Container className="p-5">
@@ -22,11 +24,13 @@ export default function AddDog(props) {
                             <Form.Group className="mb-4" controlId='dogName'>
                                 <Form.Label>Dog's Name</Form.Label>
                                 <Form.Control name="dogName" value={props.dogName} onChange={props.updateFormField} />
+                                <div style={{color: 'red'}}>{props.errors.dogNameError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4" controlId='breed'>
                                 <Form.Label>Breed</Form.Label>
                                 <Form.Control name="breed" value={props.breed} onChange={props.updateFormField} />
+                                <div style={{color: 'red'}}>{props.errors.breedError}</div>
                             </Form.Group>
 
                             {/* <Form.Group className="mb-4" controlId='breed'>
@@ -70,6 +74,7 @@ export default function AddDog(props) {
                             <Form.Group className="mb-4" controlId='dateOfBirth'>
                                 <Form.Label>Estimated Date of Birth</Form.Label>
                                 <Form.Control type="date" name="dateOfBirth" value={props.dateOfBirth} onChange={props.updateFormField} />
+                                <div style={{color: 'red'}}>{props.errors.dateOfBirthError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4">
@@ -284,13 +289,11 @@ export default function AddDog(props) {
                             </Form.Group>
 
                             <Button onClick={handleShow} className="float-end" variant="info">Cancel</Button>{' '}
-                            <Button onClick={props.addNew} className="float-end mx-2" variant="warning">Add</Button>{' '}
+                            <Button onClick={props.handleSubmit} className="float-end mx-2" variant="warning">Add</Button>{' '}
 
                             <Modal
                                 show={show}
                                 onHide={handleClose}
-                                backdrop="static"
-                                keyboard={false}
                             >
                                 <Modal.Header closeButton>
                                     <Modal.Title>Confirm Discard Changes</Modal.Title>

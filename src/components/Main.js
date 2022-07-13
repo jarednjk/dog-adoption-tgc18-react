@@ -4,37 +4,46 @@ import Navigationbar from './Navigationbar';
 import Home from './Home';
 import Browse from './Browse';
 import AddDog from './AddDog';
+import AdoptionProcess from './AdoptionProcess';
+
+const initialState = {
+    active: 'home',
+    dogName: "",
+    breed: "",
+    gender: "",
+    dateOfBirth: "",
+    temperament: [],
+    healthStatus: [],
+    familyStatus: [],
+    hypoallergenic: "",
+    toiletTrained: "",
+    description: "",
+    pictureUrl: "",
+    ownerName: "",
+    email: "",
+
+    errors: {
+        dogNameError: "",
+        breedError: "",
+        genderError: "",
+        dateOfBirthError: "",
+        temperamentError: "",
+        healthStatusError: "",
+        familyStatusError: "",
+        hypoallergenicError: "",
+        toiletTrainedError: "",
+        descriptionError: "",
+        pictureUrlError: "",
+        ownerNameError: "",
+        emailError: ""
+    }
+}
 
 export default class Main extends React.Component {
 
     url = "https://8888-jarednjk-dogadoptiontgc-e2h0d227p1k.ws-us54.gitpod.io/";
 
-    state = {
-        active: 'home',
-        data: [
-            {
-                name: "Luffy",
-                description: "iewfnoinuwefinuefwinewfinufewinuwef"
-            },
-            {
-                name: "Duffy",
-                description: "svfsdifndsiufsd dsiofjdsifjidsffdsf"
-            }
-        ],
-        dogName: "",
-        breed: "",
-        gender: "",
-        dateOfBirth: "",
-        temperament: [],
-        healthStatus: [],
-        familyStatus: [],
-        hypoallergenic: "",
-        toiletTrained: "",
-        description: "",
-        pictureUrl: "",
-        ownerName: "",
-        email: ""
-    }
+    state = initialState;
 
     async componentDidMount() {
         let response = await axios.get(this.url + 'dog_adoption');
@@ -44,6 +53,8 @@ export default class Main extends React.Component {
     }
 
     updateFormField = (e) => {
+        console.log(e.target.value);
+        console.log(e.target.name);
         this.setState({
             [e.target.name]: e.target.value
         });
@@ -99,7 +110,7 @@ export default class Main extends React.Component {
                     ownerName: this.state.ownerName,
                     email: this.state.email
                 }
-    
+
             })
 
             let newDog = {
@@ -123,12 +134,99 @@ export default class Main extends React.Component {
 
             this.setState({
                 'data': [...this.state.data, newDog],
-                'active': 'browse'
+                'active': 'browse',
             })
         } catch (e) {
             alert('Error listing new dog. Please contact administrator.')
         }
     }
+
+    // show form validation errors
+
+    validate = () => {
+        let hasErrors = false;
+        let dogNameErrorMsg = "";
+        let breedErrorMsg = "";
+        let genderErrorMsg = "";
+        let dateOfBirthErrorMsg = "";
+        let temperamentErrorMsg = "";
+        let healthStatusErrorMsg = "";
+        let familyStatusErrorMsg = "";
+        let hypoallergenicErrorMsg = "";
+        let toiletTrainedErrorMsg = "";
+        let descriptionErrorMsg = "";
+        let pictureUrlErrorMsg = "";
+        let ownerNameErrorMsg = "";
+        let emailErrorMsg = "";
+
+        const { dogName, breed, gender, dateOfBirth, temperament, healthStatus, familyStatus,
+            hypoallergenic, toiletTrained, description, pictureUrl, ownerName, email } = this.state
+
+        const { dogNameError, breedError, genderError, dateOfBirthError, temperamentError,
+            healthStatusError, familyStatusError, hypoallergenicError, toiletTrainedError,
+            descriptionError, pictureUrlError, ownerNameError, emailError } = this.state.errors
+
+        if (typeof (dogName) !== 'string' || !dogName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
+            dogNameErrorMsg = "Dog name is required";
+        } else {
+            if (dogNameError) {
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, dogNameError: dogNameErrorMsg } }))
+            }
+        }
+
+        if (typeof (breed) !== 'string' || !breed.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
+            breedErrorMsg = "Breed is required";
+        } else {
+            if (breedError) {
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, breedError: breedErrorMsg } }))
+            }
+        }
+
+        if (!dateOfBirth) {
+            dateOfBirthErrorMsg = "Date of birth is required";
+        } else {
+            if (dateOfBirthError) {
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, dateOfBirthError: dateOfBirthErrorMsg } }))
+            }
+        }
+
+        // if breed
+
+        if (dogNameErrorMsg) {
+            this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, dogNameError: dogNameErrorMsg } }))
+            hasErrors = true;
+        }
+
+        if (breedErrorMsg) {
+            this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, breedError: breedErrorMsg } }))
+            hasErrors = true;
+        }
+
+        if (dateOfBirthErrorMsg) {
+            this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, dateOfBirthError: dateOfBirthErrorMsg } }))
+            hasErrors = true;
+        }
+
+        return !hasErrors;
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('handle submit called')
+        const isValid = this.validate();
+        if (isValid) {
+            this.addNew();
+            console.log(this.state);
+            this.setState(initialState);
+        }
+    }
+
+
+    // showNameError = () => {
+    //     if (typeof (this.state.dogName) !== 'string' || !this.state.dogName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
+    //         return "Name is required";
+    //     }
+    // }
 
     renderContent() {
 
@@ -147,7 +245,9 @@ export default class Main extends React.Component {
                     <Navigationbar
                         setActive={this.setActive}
                     />
-                    <Browse data={this.state.data} />
+                    <Browse data={this.state.data}
+                        setActive={this.setActive}
+                    />
                 </React.Fragment>
             )
         } else if (this.state.active === 'add dog') {
@@ -173,9 +273,19 @@ export default class Main extends React.Component {
                         updateFormField={this.updateFormField}
                         updateBooleanFormField={this.updateBooleanFormField}
                         updateCheckbox={this.updateCheckbox}
-                        addNew={this.addNew}
+                        setActive={this.setActive}
+                        errors={this.state.errors}
+                        handleSubmit={this.handleSubmit}
+                    />
+                </React.Fragment>
+            )
+        } else if (this.state.active === 'adoptionProcess') {
+            return (
+                <React.Fragment>
+                    <Navigationbar
                         setActive={this.setActive}
                     />
+                    <AdoptionProcess />
                 </React.Fragment>
             )
         }

@@ -1,7 +1,12 @@
-import React from 'react';
-import { Container, Row, Button, Card, Col, Badge } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Row, Button, Card, Col, Badge, Modal } from 'react-bootstrap';
 
 export default function Browse(props) {
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         <React.Fragment>
             <Container>
@@ -16,11 +21,11 @@ export default function Browse(props) {
                                         <Card.Img id="card-img" variant="top" src={dog.pictureUrl} style={{ objectFit: "cover" }} />
                                         <Card.Body style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                                             <div>
-                                                <Card.Title>{dog.dogName}</Card.Title>
-                                                <Card.Subtitle className="mb-2 text-muted">{dog.breed}</Card.Subtitle>
+                                                <Card.Title>{dog.dogName[0].toUpperCase() + dog.dogName.slice(1)}</Card.Title>
+                                                <Card.Subtitle className="mb-2 text-muted">{dog.breed[0].toUpperCase() + dog.breed.slice(1)}</Card.Subtitle>
                                             </div>
                                             <Card.Text>
-                                                {dog.description}
+                                                {dog.description[0].toUpperCase() + dog.description.slice(1)}
                                             </Card.Text>
                                             <div className="mt-auto">
                                                 <div className="mb-2">
@@ -29,15 +34,39 @@ export default function Browse(props) {
                                                     <Badge bg={dog.familyStatus.includes('hdbApproved') ? "secondary" : null}>HDB approved</Badge>
                                                 </div>
                                             </div>
-                                            <Button style={{ width: "fit-content", alignSelf: 'flex-end' }} className="float-end btn-sm" variant="warning">More >></Button>
+                                            <Button onClick={handleShow} style={{ width: "fit-content", alignSelf: 'flex-end' }} className="float-end btn-sm" variant="warning">More >></Button>
                                         </Card.Body>
                                     </Card>
                                 </Col>
+
+                                
                             </React.Fragment>)}
                         </Row>
 
                     </Col>
                 </Row>
+
+                
+
+                <Modal
+                    show={show}
+                    onHide={handleClose}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>dog.dogName</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>You've made changes that haven't been published yet</p>
+                        <p>If you discard changes, your unpublished changes will be deleted.</p>
+                        <p>You can't undo this action.</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={() => { props.setActive('adoptionProcess') }} variant="danger">
+                            Discard Changes
+                        </Button>
+                        <Button onClick={handleClose} variant="info">Continue Editing</Button>
+                    </Modal.Footer>
+                </Modal>
 
 
             </Container>
