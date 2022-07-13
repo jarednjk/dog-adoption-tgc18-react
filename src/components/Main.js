@@ -7,7 +7,7 @@ import AddDog from './AddDog';
 
 export default class Main extends React.Component {
 
-    url = "https://8888-jarednjk-dogadoptiontgc-e2h0d227p1k.ws-us53.gitpod.io/";
+    url = "https://8888-jarednjk-dogadoptiontgc-e2h0d227p1k.ws-us54.gitpod.io/";
 
     state = {
         active: 'home',
