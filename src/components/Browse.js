@@ -24,7 +24,7 @@ export default function Browse(props) {
                                                 <Card.Title>{dog.dogName[0].toUpperCase() + dog.dogName.slice(1)}</Card.Title>
                                                 <Card.Subtitle className="mb-2 text-muted">{dog.breed[0].toUpperCase() + dog.breed.slice(1)}</Card.Subtitle>
                                             </div>
-                                            <Card.Text>
+                                            <Card.Text id="cardDescription">
                                                 {dog.description[0].toUpperCase() + dog.description.slice(1)}
                                             </Card.Text>
                                             <div className="mt-auto">

@@ -69,6 +69,7 @@ export default function AddDog(props) {
                                         />
                                     </div>
                                 ))}
+                                    <div style={{color: 'red'}}>{props.errors.genderError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4" controlId='dateOfBirth'>
@@ -133,6 +134,7 @@ export default function AddDog(props) {
                                         />
                                     </div>
                                 ))}
+                                    <div style={{color: 'red'}}>{props.errors.temperamentError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4">
@@ -237,6 +239,7 @@ export default function AddDog(props) {
                                         />
                                     </div>
                                 ))}
+                                    <div style={{color: 'red'}}>{props.errors.hypoallergenicError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4">
@@ -265,27 +268,32 @@ export default function AddDog(props) {
                                         />
                                     </div>
                                 ))}
+                                    <div style={{color: 'red'}}>{props.errors.toiletTrainedError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4" controlId="description">
                                 <Form.Label>Description</Form.Label>
                                 <Form.Control placeholder="Write a short description on the dog" as="textarea" rows={3} name="description" value={props.description} onChange={props.updateFormField} />
+                                <div style={{color: 'red'}}>{props.errors.descriptionError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-5" controlId="pictureUrl">
                                 <Form.Label>Picture</Form.Label>
                                 <Form.Control placeholder="Upload a picture of the dog in URL format" name="pictureUrl" value={props.pictureUrl} onChange={props.updateFormField} />
+                                <div style={{color: 'red'}}>{props.errors.pictureUrlError}</div>
                             </Form.Group>
 
                             <h4 className="mb-4 text-decoration-underline">Caretaker Details:</h4>
                             <Form.Group className="mb-4" controlId="ownerName">
                                 <Form.Label>Your Name</Form.Label>
                                 <Form.Control placeholder="Name of individual or organization" name="ownerName" value={props.ownerName} onChange={props.updateFormField} />
+                                <div style={{color: 'red'}}>{props.errors.ownerNameError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4" controlId="email">
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control type="email" placeholder="name@example.com" name="email" value={props.email} onChange={props.updateFormField} />
+                                <div style={{color: 'red'}}>{props.errors.emailError}</div>
                             </Form.Group>
 
                             <Button onClick={handleShow} className="float-end" variant="info">Cancel</Button>{' '}

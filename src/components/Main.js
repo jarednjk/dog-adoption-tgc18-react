@@ -27,9 +27,9 @@ const initialState = {
         breedError: "",
         genderError: "",
         dateOfBirthError: "",
-        temperamentError: "",
+        temperamentError: [],
         healthStatusError: "",
-        familyStatusError: "",
+        familyStatusError: [],
         hypoallergenicError: "",
         toiletTrainedError: "",
         descriptionError: "",
@@ -166,34 +166,102 @@ export default class Main extends React.Component {
             healthStatusError, familyStatusError, hypoallergenicError, toiletTrainedError,
             descriptionError, pictureUrlError, ownerNameError, emailError } = this.state.errors
 
-        if (typeof (dogName) !== 'string' || !dogName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
-            dogNameErrorMsg = "Dog name is required";
+        if (!dogName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
+            dogNameErrorMsg = "Please enter the dog's name";
         } else {
             if (dogNameError) {
-                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, dogNameError: dogNameErrorMsg } }))
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, dogNameError: dogNameErrorMsg } }));
             }
         }
 
-        if (typeof (breed) !== 'string' || !breed.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
-            breedErrorMsg = "Breed is required";
+        if (!gender) {
+            genderErrorMsg = "Please select a gender";
+        } else {
+            if (genderError) {
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, genderError: genderErrorMsg } }))
+            }
+        }
+
+        if (!breed.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
+            breedErrorMsg = "Please enter the dog breed";
         } else {
             if (breedError) {
                 this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, breedError: breedErrorMsg } }))
             }
         }
 
-        if (!dateOfBirth) {
-            dateOfBirthErrorMsg = "Date of birth is required";
+        if (!dateOfBirth.match(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)) {
+            dateOfBirthErrorMsg = "Please select the dog's date of birth";
         } else {
             if (dateOfBirthError) {
                 this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, dateOfBirthError: dateOfBirthErrorMsg } }))
             }
         }
 
-        // if breed
+        if (temperament.length < 1 || temperament.length > 3) {
+            temperamentErrorMsg = "Please select between 1 to 3 temperaments only";
+        } else {
+            if (temperamentError) {
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, temperamentError: temperamentErrorMsg } }))
+            }
+        }
+
+        if (description.length < 50) {
+            descriptionErrorMsg = "Please enter a description with at least 50 characters";
+        } else {
+            if (descriptionError) {
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, descriptionError: descriptionErrorMsg } }))
+            }
+        }
+
+        if (!hypoallergenic && hypoallergenic !== false ) {
+            console.log(hypoallergenic)
+            hypoallergenicErrorMsg = "Please select an option";
+        } else {
+            if (hypoallergenicError) {
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, hypoallergenicError: hypoallergenicErrorMsg}}))
+            }
+        }
+
+        if (!toiletTrained && toiletTrained !== false) {
+            toiletTrainedErrorMsg = "Please select an option";
+        } else {
+            if (toiletTrainedError) {
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, toiletTrainedError: toiletTrainedErrorMsg}}))
+            }
+        }
+
+        if (!pictureUrl.match(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)) {
+            pictureUrlErrorMsg = "Please upload the image in the correct format";
+        } else {
+            if (pictureUrlError) {
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, pictureUrlError: pictureUrlErrorMsg}}))
+            }
+        }
+
+        if (!ownerName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
+            ownerNameErrorMsg = "Please enter your name";
+        } else {
+            if (ownerNameError) {
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, ownerNameError: ownerNameErrorMsg}}))
+            }
+        }
+
+        if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+            emailErrorMsg = "Please enter an appropriate email";
+        } else {
+            if (emailError) {
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, emailError: emailErrorMsg}}))
+            }
+        }
 
         if (dogNameErrorMsg) {
             this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, dogNameError: dogNameErrorMsg } }))
+            hasErrors = true;
+        }
+
+        if (genderErrorMsg) {
+            this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, genderError: genderErrorMsg } }))
             hasErrors = true;
         }
 
@@ -206,6 +274,42 @@ export default class Main extends React.Component {
             this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, dateOfBirthError: dateOfBirthErrorMsg } }))
             hasErrors = true;
         }
+
+        if (temperamentErrorMsg) {
+            this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, temperamentError: temperamentErrorMsg } }))
+            hasErrors = true;
+        }
+
+        if (descriptionErrorMsg) {
+            this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, descriptionError: descriptionErrorMsg } }))
+            hasErrors = true;
+        }
+
+        if (hypoallergenicErrorMsg) {
+            this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, hypoallergenicError: hypoallergenicErrorMsg } }))
+            hasErrors = true;
+        }
+
+        if (toiletTrainedErrorMsg) {
+            this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, toiletTrainedError: toiletTrainedErrorMsg } }))
+            hasErrors = true;
+        }
+
+        if (pictureUrlErrorMsg) {
+            this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, pictureUrlError: pictureUrlErrorMsg } }))
+            hasErrors = true;
+        }
+
+        if (ownerNameErrorMsg) {
+            this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, ownerNameError: ownerNameErrorMsg } }))
+            hasErrors = true;
+        }
+
+        if (emailErrorMsg) {
+            this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, emailError: emailErrorMsg } }))
+            hasErrors = true;
+        }
+
 
         return !hasErrors;
     }
@@ -220,13 +324,6 @@ export default class Main extends React.Component {
             this.setState(initialState);
         }
     }
-
-
-    // showNameError = () => {
-    //     if (typeof (this.state.dogName) !== 'string' || !this.state.dogName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
-    //         return "Name is required";
-    //     }
-    // }
 
     renderContent() {
 
