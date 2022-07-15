@@ -159,12 +159,11 @@ export default class Main extends React.Component {
         let ownerNameErrorMsg = "";
         let emailErrorMsg = "";
 
-        const { dogName, breed, gender, dateOfBirth, temperament, healthStatus, familyStatus,
-            hypoallergenic, toiletTrained, description, pictureUrl, ownerName, email } = this.state
+        const { dogName, breed, gender, dateOfBirth, temperament,hypoallergenic, 
+            toiletTrained, description, pictureUrl, ownerName, email } = this.state
 
-        const { dogNameError, breedError, genderError, dateOfBirthError, temperamentError,
-            healthStatusError, familyStatusError, hypoallergenicError, toiletTrainedError,
-            descriptionError, pictureUrlError, ownerNameError, emailError } = this.state.errors
+        const { dogNameError, breedError, genderError, dateOfBirthError, temperamentError, hypoallergenicError, 
+            toiletTrainedError, descriptionError, pictureUrlError, ownerNameError, emailError } = this.state.errors
 
         if (!dogName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
             dogNameErrorMsg = "Please enter the dog's name";

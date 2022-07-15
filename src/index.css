@@ -16,8 +16,8 @@ code {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* number of lines to show */
-          line-clamp: 2; 
+  -webkit-line-clamp: 3; /* number of lines to show */
+          line-clamp: 3; 
   -webkit-box-orient: vertical;
 }
 
@@ -25,9 +25,30 @@ code {
   height: 300px;
 }
 
+.mdSearchSm {
+  width: 50%;
+}
+
 /* for iPad-size and above */
 @media screen and (min-width: 768px) {
   #card-img {
     height: 250px;
+  }
+
+  .mdSearch {
+    width: 50%;
+  }
+
+
+}
+
+/* for laptop-size */
+@media screen and (min-width: 992px) {
+  .mdSearch {
+    width: 100%;
+  }
+
+  .mdSearchSm {
+    width: 100%;
   }
 }
