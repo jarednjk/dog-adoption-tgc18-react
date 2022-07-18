@@ -7,8 +7,6 @@ export default function AddDog(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    console.log(props.dogNameError);    
-
     return (
         <React.Fragment>
             <Container className="p-5">

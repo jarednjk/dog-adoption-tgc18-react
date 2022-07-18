@@ -8,6 +8,7 @@ import AdoptionProcess from './AdoptionProcess';
 
 const initialState = {
     active: 'home',
+    modal: null,
     dogName: "",
     breed: "",
     gender: "",
@@ -21,6 +22,14 @@ const initialState = {
     pictureUrl: "",
     ownerName: "",
     email: "",
+
+    dataFiltered: [],
+    keywordSearch: "",
+    genderSearch: 'all',
+    hypoallergenicSearch: "",
+    healthSearch: [],
+    familySearch: [],
+    temperamentSearch: [],
 
     errors: {
         dogNameError: "",
@@ -50,6 +59,64 @@ export default class Main extends React.Component {
         this.setState({
             data: response.data
         })
+    }
+
+    handleModal = (dogId) => {
+        this.setState({
+            modal: dogId
+        })
+    }
+
+    closeModal = () => {
+        this.setState({
+            modal: null
+        })
+    }
+       
+    
+
+    updateGender = async (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+
+        await setTimeout(() => {
+            this.getSearchResults()
+        }, 100);
+    }
+
+    updateSearchFormField = async (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+
+        await setTimeout(() => {
+            this.getSearchResults()
+        }, 100);
+    }
+
+
+    updateSearchCheckbox = async (e) => {
+
+        if (this.state[e.target.name].includes(e.target.value)) {
+            let index = this.state[e.target.name].indexOf(e.target.value);
+            let cloned = this.state[e.target.name].slice(0);
+            cloned.splice(index, 1)
+            this.setState({
+                [e.target.name]: cloned,
+
+            });
+        } else {
+            let cloned = this.state[e.target.name].slice(0);
+            cloned.push(e.target.value)
+
+            this.setState({
+                [e.target.name]: cloned
+            });
+        }
+        await setTimeout(() => {
+            this.getSearchResults()
+        }, 500);
     }
 
     updateFormField = (e) => {
@@ -89,6 +156,23 @@ export default class Main extends React.Component {
                 [e.target.name]: cloned
             });
         }
+    }
+
+    // Search for dog
+    getSearchResults = async () => {
+        let response = await axios.get(this.url + 'dog_adoption', {
+            params: {
+                gender: this.state.genderSearch,
+                search: this.state.keywordSearch,
+                hypoallergenic: this.state.hypoallergenicSearch,
+                healthStatus: this.state.healthSearch,
+                familyStatus: this.state.familySearch,
+                temperament: this.state.temperamentSearch
+            }
+        })
+        this.setState({
+            dataFiltered: response.data
+        })
     }
 
     // Add new dog listing
@@ -150,8 +234,6 @@ export default class Main extends React.Component {
         let genderErrorMsg = "";
         let dateOfBirthErrorMsg = "";
         let temperamentErrorMsg = "";
-        let healthStatusErrorMsg = "";
-        let familyStatusErrorMsg = "";
         let hypoallergenicErrorMsg = "";
         let toiletTrainedErrorMsg = "";
         let descriptionErrorMsg = "";
@@ -159,10 +241,10 @@ export default class Main extends React.Component {
         let ownerNameErrorMsg = "";
         let emailErrorMsg = "";
 
-        const { dogName, breed, gender, dateOfBirth, temperament,hypoallergenic, 
+        const { dogName, breed, gender, dateOfBirth, temperament, hypoallergenic,
             toiletTrained, description, pictureUrl, ownerName, email } = this.state
 
-        const { dogNameError, breedError, genderError, dateOfBirthError, temperamentError, hypoallergenicError, 
+        const { dogNameError, breedError, genderError, dateOfBirthError, temperamentError, hypoallergenicError,
             toiletTrainedError, descriptionError, pictureUrlError, ownerNameError, emailError } = this.state.errors
 
         if (!dogName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
@@ -213,12 +295,12 @@ export default class Main extends React.Component {
             }
         }
 
-        if (!hypoallergenic && hypoallergenic !== false ) {
+        if (!hypoallergenic && hypoallergenic !== false) {
             console.log(hypoallergenic)
             hypoallergenicErrorMsg = "Please select an option";
         } else {
             if (hypoallergenicError) {
-                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, hypoallergenicError: hypoallergenicErrorMsg}}))
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, hypoallergenicError: hypoallergenicErrorMsg } }))
             }
         }
 
@@ -226,7 +308,7 @@ export default class Main extends React.Component {
             toiletTrainedErrorMsg = "Please select an option";
         } else {
             if (toiletTrainedError) {
-                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, toiletTrainedError: toiletTrainedErrorMsg}}))
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, toiletTrainedError: toiletTrainedErrorMsg } }))
             }
         }
 
@@ -234,7 +316,7 @@ export default class Main extends React.Component {
             pictureUrlErrorMsg = "Please upload the image in the correct format";
         } else {
             if (pictureUrlError) {
-                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, pictureUrlError: pictureUrlErrorMsg}}))
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, pictureUrlError: pictureUrlErrorMsg } }))
             }
         }
 
@@ -242,7 +324,7 @@ export default class Main extends React.Component {
             ownerNameErrorMsg = "Please enter your name";
         } else {
             if (ownerNameError) {
-                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, ownerNameError: ownerNameErrorMsg}}))
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, ownerNameError: ownerNameErrorMsg } }))
             }
         }
 
@@ -250,7 +332,7 @@ export default class Main extends React.Component {
             emailErrorMsg = "Please enter an appropriate email";
         } else {
             if (emailError) {
-                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, emailError: emailErrorMsg}}))
+                this.setState(prevState => ({ ...prevState, errors: { ...prevState.errors, emailError: emailErrorMsg } }))
             }
         }
 
@@ -336,16 +418,59 @@ export default class Main extends React.Component {
                 </React.Fragment>
             );
         } else if (this.state.active === 'browse') {
-            return (
-                <React.Fragment>
-                    <Navigationbar
-                        setActive={this.setActive}
-                    />
-                    <Browse data={this.state.data}
-                        setActive={this.setActive}
-                    />
-                </React.Fragment>
-            )
+            if (!this.state.dataFiltered[0]) {
+                return (
+                    <React.Fragment>
+                        <Navigationbar
+                            setActive={this.setActive}
+                        />
+                        <Browse data={this.state.data}
+                            setActive={this.setActive}
+                            keywordSearch={this.state.keywordSearch}
+                            genderSearch={this.state.genderSearch}
+                            healthSearch={this.state.healthSearch}
+                            familySearch={this.state.familySearch}
+                            hypoallergenicSearch={this.state.hypoallergenicSearch}
+                            temperamentSearch={this.state.temperamentSearch}
+                            updateSearchCheckbox={this.updateSearchCheckbox}
+                            updateSearchFormField={this.updateSearchFormField}
+                            updateFormField={this.updateFormField}
+                            updateGender={this.updateGender}
+                            modal={this.state.modal}
+                            handleModal={this.handleModal}
+                            closeModal={this.closeModal}
+                        />
+                    </React.Fragment>
+
+                )
+            } else {
+                return (
+                    <React.Fragment>
+                        <Navigationbar
+                            setActive={this.setActive}
+                        />
+                        <Browse data={this.state.dataFiltered}
+                            setActive={this.setActive}
+                            keywordSearch={this.state.keywordSearch}
+                            genderSearch={this.state.genderSearch}
+                            healthSearch={this.state.healthSearch}
+                            familySearch={this.state.familySearch}
+                            hypoallergenicSearch={this.state.hypoallergenicSearch}
+                            temperamentSearch={this.state.temperamentSearch}
+                            updateSearchCheckbox={this.updateSearchCheckbox}
+                            updateSearchFormField={this.updateSearchFormField}
+                            updateFormField={this.updateFormField}
+                            updateGender={this.updateGender}
+                            handleModal={this.handleModal}
+                            closeModal={this.closeModal}
+                            modal={this.state.modal}
+                        />
+                    </React.Fragment>
+
+                )
+            }
+
+
         } else if (this.state.active === 'add dog') {
             return (
                 <React.Fragment>
@@ -353,6 +478,7 @@ export default class Main extends React.Component {
                         setActive={this.setActive}
                     />
                     <AddDog
+                        setActive={this.setActive}
                         dogName={this.state.dogName}
                         breed={this.state.breed}
                         gender={this.state.gender}
@@ -369,7 +495,6 @@ export default class Main extends React.Component {
                         updateFormField={this.updateFormField}
                         updateBooleanFormField={this.updateBooleanFormField}
                         updateCheckbox={this.updateCheckbox}
-                        setActive={this.setActive}
                         errors={this.state.errors}
                         handleSubmit={this.handleSubmit}
                     />

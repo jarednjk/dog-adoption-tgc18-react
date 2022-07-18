@@ -25,11 +25,33 @@ code {
   height: 300px;
 }
 
-.mdSearchSm {
-  width: 50%;
+#modal-img {
+  width: 100px;
 }
 
-/* for iPad-size and above */
+.mdSearchSm {
+  width: 100%;
+}
+
+.modalColumn {
+  flex: 50%;
+}
+
+.modalRow {
+  display: flex;
+}
+
+
+/* for sm screen size */
+@media screen and (min-width: 768px) {
+  .mdSearchSm {
+    width: 50%;
+  }
+}
+
+
+
+/* for md screen size and above */
 @media screen and (min-width: 768px) {
   #card-img {
     height: 250px;
@@ -42,7 +64,7 @@ code {
 
 }
 
-/* for laptop-size */
+/* for lg screen size and above */
 @media screen and (min-width: 992px) {
   .mdSearch {
     width: 100%;
