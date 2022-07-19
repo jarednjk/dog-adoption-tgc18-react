@@ -20,8 +20,8 @@ export default function Browse(props) {
                             <Accordion.Body>
                                 <Row>
                                     <Form>
-                                        <div className="d-sm-flex mb-sm-3 d-lg-block">
-                                            <Form.Group className="mb-4 mdSearchSm pe-sm-5 pe-lg-0" controlId="keywordSearch">
+                                        <div className="d-sm-flex mb-sm-1 mb-md-3 d-lg-block">
+                                            <Form.Group className="mdSearchSm pe-sm-5 pe-lg-0" controlId="keywordSearch">
                                                 <Form.Label>Keyword Search</Form.Label>
                                                 <Form.Control placeholder="Name, breed, etc"
                                                     type="text"
@@ -30,7 +30,7 @@ export default function Browse(props) {
                                                     onChange={props.updateSearchFormField} />
                                             </Form.Group>
 
-                                            <Form.Group className="mb-4 mdSearchSm" controlId="sortAge">
+                                            <Form.Group className="mdSearchSm" controlId="sortAge">
                                                 <Form.Label>Sort Age by</Form.Label>
                                                 {['radio'].map((type) => (
                                                     <div key={`inline-${type}`}>
@@ -38,8 +38,8 @@ export default function Browse(props) {
                                                             inline
                                                             label="Young > Old"
                                                             value=""
-                                                            name=""
-
+                                                            name="dateOfBirth"
+                                                            
                                                             type={type}
                                                             id={`inline-${type}-7`}
                                                         />
@@ -47,7 +47,7 @@ export default function Browse(props) {
                                                             inline
                                                             label="Old > Young"
                                                             value=""
-                                                            name=""
+                                                            name="dateOfBirth"
 
                                                             type={type}
                                                             id={`inline-${type}-8`}
@@ -57,8 +57,8 @@ export default function Browse(props) {
                                             </Form.Group>
                                         </div>
 
-                                        <div className="d-sm-flex d-lg-block">
-                                            <Form.Group className="mb-4 pe-sm-5 pe-lg-0 mdSearchSm">
+                                        <div className="d-sm-flex d-lg-block mb-4 mb-sm-0">
+                                            <Form.Group className="pe-sm-5 pe-lg-0 mdSearchSm">
                                                 <Form.Label>Gender</Form.Label>
                                                 {['radio'].map((type) => (
                                                     <div key={`inline-${type}`} className="mb-4">
@@ -95,17 +95,17 @@ export default function Browse(props) {
                                                     </div>
                                                 ))}
                                             </Form.Group>
-                                            <Form.Group className="mb-4 mdSearchSm">
+                                            <Form.Group className="mdSearchSm">
                                                 <Form.Label>Hypoallergenic</Form.Label>
                                                 {['checkbox'].map((type) => (
                                                     <div key={`inline-${type}`} className="mb-4">
                                                         <Form.Check
                                                             inline
                                                             label="Yes"
-                                                            value="true"
+                                                            // value={props.hypoallergenicSearch }
                                                             name="hypoallergenicSearch"
-                                                            checked={props.hypoallergenicSearch === true}
-                                                            onChange={props.updateSearchCheckbox}
+                                                            checked={props.hypoallergenicSearch}
+                                                            onChange={props.updateHypoallergenic}
                                                             type={type}
                                                             id={`inline-${type}-20`}
                                                         />
@@ -127,7 +127,7 @@ export default function Browse(props) {
 
 
                                         <div className="d-md-flex d-lg-block">
-                                            <Form.Group className="mb-4 pe-md-5 pe-lg-0 mdSearch">
+                                            <Form.Group className="pe-md-5 pe-lg-0 mdSearch">
                                                 <Form.Label>Health Status</Form.Label>
                                                 {['checkbox'].map((type) => (
                                                     <div key={`inline-${type}`} className="mb-4">
@@ -165,7 +165,7 @@ export default function Browse(props) {
                                                 ))}
                                             </Form.Group>
 
-                                            <Form.Group className="mb-4 mdSearch">
+                                            <Form.Group className="mdSearch">
                                                 <Form.Label>Family Status</Form.Label>
                                                 {['checkbox'].map((type) => (
                                                     <div key={`inline-${type}`} className="mb-4">
@@ -206,7 +206,7 @@ export default function Browse(props) {
 
 
 
-                                        <Form.Group className="mb-4">
+                                        <Form.Group>
                                             <Form.Label>Temperament</Form.Label>
                                             {['checkbox'].map((type) => (
                                                 <div key={`inline-${type}`} className="mb-4">

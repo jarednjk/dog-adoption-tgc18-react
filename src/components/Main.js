@@ -26,7 +26,7 @@ const initialState = {
     dataFiltered: [],
     keywordSearch: "",
     genderSearch: 'all',
-    hypoallergenicSearch: "",
+    hypoallergenicSearch: false,
     healthSearch: [],
     familySearch: [],
     temperamentSearch: [],
@@ -73,6 +73,19 @@ export default class Main extends React.Component {
         })
     }
        
+    updateHypoallergenic = async (e) => {
+        console.log(e.target.value)
+        let newData
+        this.state.hypoallergenicSearch === false ? newData = true : newData = false;
+
+        this.setState({
+            hypoallergenicSearch : newData
+        });
+
+        await setTimeout(() => {
+            this.getSearchResults()
+        }, 100);
+    }
     
 
     updateGender = async (e) => {
@@ -120,8 +133,6 @@ export default class Main extends React.Component {
     }
 
     updateFormField = (e) => {
-        console.log(e.target.value);
-        console.log(e.target.name);
         this.setState({
             [e.target.name]: e.target.value
         });
@@ -130,6 +141,12 @@ export default class Main extends React.Component {
     updateBooleanFormField = (e) => {
         this.setState({
             [e.target.name]: e.target.value === 'true' ? true : false
+        })
+    }
+
+    hypoallergenicSearch = (e) => {
+        this.setState({
+            [e.target.name]: true
         })
     }
 
@@ -164,6 +181,7 @@ export default class Main extends React.Component {
             params: {
                 gender: this.state.genderSearch,
                 search: this.state.keywordSearch,
+                dateOfBirth: this.state.dateOfBirthSearch,
                 hypoallergenic: this.state.hypoallergenicSearch,
                 healthStatus: this.state.healthSearch,
                 familyStatus: this.state.familySearch,
@@ -439,6 +457,7 @@ export default class Main extends React.Component {
                             modal={this.state.modal}
                             handleModal={this.handleModal}
                             closeModal={this.closeModal}
+                            updateHypoallergenic={this.updateHypoallergenic}
                         />
                     </React.Fragment>
 
@@ -464,6 +483,7 @@ export default class Main extends React.Component {
                             handleModal={this.handleModal}
                             closeModal={this.closeModal}
                             modal={this.state.modal}
+                            updateHypoallergenic={this.updateHypoallergenic}
                         />
                     </React.Fragment>
 
