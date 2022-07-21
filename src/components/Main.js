@@ -5,6 +5,7 @@ import Home from './Home';
 import Browse from './Browse';
 import AddDog from './AddDog';
 import AdoptionProcess from './AdoptionProcess';
+import UpdateDog from './UpdateDog';
 
 const initialState = {
     active: 'home',
@@ -22,6 +23,21 @@ const initialState = {
     pictureUrl: "",
     ownerName: "",
     email: "",
+
+    dogBeingEdited: false,
+    editDogName: "",
+    editBreed: "",
+    editGender: "",
+    editDateOfBirth: "",
+    editTemperament: [],
+    editHealthStatus: [],
+    editFamilyStatus: [],
+    editHypoallergenic: "",
+    editToiletTrained: "",
+    editDescription: "",
+    editPictureUrl: "",
+    editOwnerName: "",
+    editEmail: "",
 
     dataFiltered: [],
     keywordSearch: "",
@@ -61,6 +77,28 @@ export default class Main extends React.Component {
         })
     }
 
+    updateDog = async() => {
+        let response = await axios.get(`${this.url}dog_adoption/${this.state.modal}`);
+        console.log(`${this.url}dog_adoption/${this.state.modal}`);
+        this.setState({
+            editDogName: response.data.dogName,
+            editBreed: response.data.breed,
+            editGender: response.data.gender,
+            editDateOfBirth: response.data.dateOfBirth,
+            editTemperament: response.data.temperament,
+            editHealthStatus: response.data.healthStatus,
+            editFamilyStatus: response.data.familyStatus,
+            editHypoallergenic: response.data.hypoallergenic,
+            editToiletTrained: response.data.toiletTrained,
+            editDescription: response.data.description,
+            editPictureUrl: response.data.pictureUrl,
+            editOwnerName: response.data.ownerName,
+            editEmail: response.data.email,
+            dogBeingEdited: true,
+        })
+
+    }
+
     handleModal = (dogId) => {
         this.setState({
             modal: dogId
@@ -72,6 +110,12 @@ export default class Main extends React.Component {
             modal: null
         })
     }
+
+    // updateDog = () => {
+    //     this.setState({
+    //         dogBeingEdited: true
+    //     })
+    // } 
        
     updateHypoallergenic = async (e) => {
         console.log(e.target.value)
@@ -86,7 +130,6 @@ export default class Main extends React.Component {
             this.getSearchResults()
         }, 100);
     }
-    
 
     updateGender = async (e) => {
         this.setState({
@@ -107,7 +150,6 @@ export default class Main extends React.Component {
             this.getSearchResults()
         }, 100);
     }
-
 
     updateSearchCheckbox = async (e) => {
 
@@ -458,6 +500,8 @@ export default class Main extends React.Component {
                             handleModal={this.handleModal}
                             closeModal={this.closeModal}
                             updateHypoallergenic={this.updateHypoallergenic}
+                            updateDog={this.updateDog}
+                          
                         />
                     </React.Fragment>
 
@@ -484,6 +528,9 @@ export default class Main extends React.Component {
                             closeModal={this.closeModal}
                             modal={this.state.modal}
                             updateHypoallergenic={this.updateHypoallergenic}
+                            updateDog={this.updateDog}
+
+                           
                         />
                     </React.Fragment>
 
@@ -527,6 +574,37 @@ export default class Main extends React.Component {
                         setActive={this.setActive}
                     />
                     <AdoptionProcess />
+                </React.Fragment>
+            )
+        } else if (
+            // this.state.dogBeingEdited === true && 
+            this.state.active === 'updateDog'){
+            return (
+                <React.Fragment>
+                    <Navigationbar
+                        setActive={this.setActive}
+                    />
+                    <UpdateDog
+                     dogBeingEdited={this.state.dogBeingEdited}
+                     editDogName={this.state.editDogName}
+                     editBreed={this.state.editBreed}
+                     editGender={this.state.editGender}
+                     editDateOfBirth={this.state.editDateOfBirth}
+                     editTemperament={this.state.editTemperament}
+                     editHealthStatus={this.state.editHealthStatus}
+                     editFamilyStatus={this.state.editFamilyStatus}
+                     editHypoallergenic={this.state.editHypoallergenic}
+                     editToiletTrained={this.state.editToiletTrained}
+                     editDescription={this.state.editDescription}
+                     editPictureUrl={this.state.editPictureUrl}
+                     editOwnerName={this.state.editOwnerName}
+                     editEmail={this.state.editEmail}
+                     updateDog={this.updateDog}
+                     errors={this.state.errors}
+                     updateCheckbox={this.updateCheckbox}
+                     updateFormField={this.updateFormField}
+                     updateBooleanFormField={this.updateBooleanFormField}
+                     />
                 </React.Fragment>
             )
         }
