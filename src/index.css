@@ -44,17 +44,25 @@ code {
   height: 300px;
 }
 
+#edit-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 450px;
+  height: 300px;
+}
+
 #card-animation {
   border-radius: 4px;
   background: #fff;
-  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
+  transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
   cursor: pointer;
 }
 
 #card-animation:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
 }
 
 .hero-container {
@@ -64,17 +72,17 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.2);
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
   object-fit: contain
 }
- 
-.hero-container > h1 {
+
+.hero-container>h1 {
   color: white;
   font-size: 100px;
 
 }
 
-.hero-container > p {
+.hero-container>p {
   color: white;
 }
 
@@ -129,6 +137,11 @@ video {
     width: 50%;
   }
 
+  #edit-img {
+    width: 700px;
+    height: 350px;
+  }
+
 
 }
 
@@ -142,8 +155,9 @@ video {
     width: 100%;
   }
 
-
   #modal-img {
     min-width: 50%;
   }
+
+
 }

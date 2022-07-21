@@ -77,9 +77,11 @@ export default class Main extends React.Component {
         })
     }
 
-    updateDog = async() => {
+    updateDog = async () => {
+
         let response = await axios.get(`${this.url}dog_adoption/${this.state.modal}`);
-        console.log(`${this.url}dog_adoption/${this.state.modal}`);
+        console.log(response.data);
+        // this.handleModal( response.data._id )
         this.setState({
             editDogName: response.data.dogName,
             editBreed: response.data.breed,
@@ -92,8 +94,8 @@ export default class Main extends React.Component {
             editToiletTrained: response.data.toiletTrained,
             editDescription: response.data.description,
             editPictureUrl: response.data.pictureUrl,
-            editOwnerName: response.data.ownerName,
-            editEmail: response.data.email,
+            editOwnerName: response.data.owner.ownerName,
+            editEmail: response.data.owner.email,
             dogBeingEdited: true,
         })
 
@@ -111,19 +113,13 @@ export default class Main extends React.Component {
         })
     }
 
-    // updateDog = () => {
-    //     this.setState({
-    //         dogBeingEdited: true
-    //     })
-    // } 
-       
     updateHypoallergenic = async (e) => {
         console.log(e.target.value)
         let newData
         this.state.hypoallergenicSearch === false ? newData = true : newData = false;
 
         this.setState({
-            hypoallergenicSearch : newData
+            hypoallergenicSearch: newData
         });
 
         await setTimeout(() => {
@@ -132,7 +128,7 @@ export default class Main extends React.Component {
     }
 
     updateGender = async (e) => {
-        this.setState({
+        await this.setState({
             [e.target.name]: e.target.value
         });
 
@@ -230,8 +226,44 @@ export default class Main extends React.Component {
                 temperament: this.state.temperamentSearch
             }
         })
+        console.log(response.data)
         this.setState({
             dataFiltered: response.data
+        })
+    }
+
+    editNew = async () => {
+
+        let updateDog = {
+            dogName: this.state.editDogName,
+            breed: this.state.editBreed,
+            gender: this.state.editGender,
+            dateOfBirth: this.state.editDateOfBirth,
+            temperament: this.state.editTemperament,
+            healthStatus: this.state.editHealthStatus,
+            familyStatus: this.state.editFamilyStatus,
+            hypoallergenic: this.state.editHypoallergenic,
+            toiletTrained: this.state.editToiletTrained,
+            description: this.state.editDescription,
+            pictureUrl: this.state.editPictureUrl,
+            owner: {
+                ownerName: this.state.editOwnerName,
+                email: this.state.editEmail
+            }
+        }
+        console.log("Modal==>" ,this.state.modal)
+        let editId = this.state.modal
+        await axios.put(`${this.url}dog_adoption/${this.state.modal}`, updateDog)
+        
+        let response = await axios.get(this.url + 'dog_adoption');
+
+        console.log(editId)
+        let index = this.state.data.findIndex ( d => d._id === editId);
+        console.log(index)
+
+        this.setState({
+            'data': response.data,
+            'active': 'browse',
         })
     }
 
@@ -307,7 +339,7 @@ export default class Main extends React.Component {
         const { dogNameError, breedError, genderError, dateOfBirthError, temperamentError, hypoallergenicError,
             toiletTrainedError, descriptionError, pictureUrlError, ownerNameError, emailError } = this.state.errors
 
-        if (!dogName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
+        if (!dogName.match(/^[A-Za-z]+( [A-Za-z]+)*$/) && !this.state.editDogName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
             dogNameErrorMsg = "Please enter the dog's name";
         } else {
             if (dogNameError) {
@@ -315,7 +347,7 @@ export default class Main extends React.Component {
             }
         }
 
-        if (!gender) {
+        if (!gender && !this.state.editGender) {
             genderErrorMsg = "Please select a gender";
         } else {
             if (genderError) {
@@ -323,7 +355,7 @@ export default class Main extends React.Component {
             }
         }
 
-        if (!breed.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
+        if (!breed.match(/^[A-Za-z]+( [A-Za-z]+)*$/) && !this.state.editBreed.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
             breedErrorMsg = "Please enter the dog breed";
         } else {
             if (breedError) {
@@ -331,7 +363,7 @@ export default class Main extends React.Component {
             }
         }
 
-        if (!dateOfBirth.match(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)) {
+        if (!dateOfBirth.match(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/) && !this.state.editDateOfBirth.match(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)) {
             dateOfBirthErrorMsg = "Please select the dog's date of birth";
         } else {
             if (dateOfBirthError) {
@@ -339,7 +371,7 @@ export default class Main extends React.Component {
             }
         }
 
-        if (temperament.length < 1 || temperament.length > 3) {
+        if ((temperament.length < 1 || temperament.length > 3) && (this.state.editTemperament.length < 1 || this.state.editTemperament.length > 3)) {
             temperamentErrorMsg = "Please select between 1 to 3 temperaments only";
         } else {
             if (temperamentError) {
@@ -347,7 +379,7 @@ export default class Main extends React.Component {
             }
         }
 
-        if (description.length < 50) {
+        if (description.length < 50 && this.state.editDescription.length < 50) {
             descriptionErrorMsg = "Please enter a description with at least 50 characters";
         } else {
             if (descriptionError) {
@@ -355,7 +387,7 @@ export default class Main extends React.Component {
             }
         }
 
-        if (!hypoallergenic && hypoallergenic !== false) {
+        if ((!hypoallergenic && hypoallergenic !== false) && (!this.state.editHypoallergenic && this.state.editHypoallergenic !== false)) {
             console.log(hypoallergenic)
             hypoallergenicErrorMsg = "Please select an option";
         } else {
@@ -364,7 +396,7 @@ export default class Main extends React.Component {
             }
         }
 
-        if (!toiletTrained && toiletTrained !== false) {
+        if ((!toiletTrained && toiletTrained !== false) && (!this.state.editToiletTrained && this.state.editToiletTrained !== false)) {
             toiletTrainedErrorMsg = "Please select an option";
         } else {
             if (toiletTrainedError) {
@@ -372,7 +404,8 @@ export default class Main extends React.Component {
             }
         }
 
-        if (!pictureUrl.match(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)) {
+        if (!pictureUrl.match(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)
+            && !this.state.editPictureUrl.match(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)) {
             pictureUrlErrorMsg = "Please upload the image in the correct format";
         } else {
             if (pictureUrlError) {
@@ -380,7 +413,7 @@ export default class Main extends React.Component {
             }
         }
 
-        if (!ownerName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
+        if (!ownerName.match(/^[A-Za-z]+( [A-Za-z]+)*$/) && !this.state.editOwnerName.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
             ownerNameErrorMsg = "Please enter your name";
         } else {
             if (ownerNameError) {
@@ -388,7 +421,7 @@ export default class Main extends React.Component {
             }
         }
 
-        if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+        if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) && !this.state.editEmail.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
             emailErrorMsg = "Please enter an appropriate email";
         } else {
             if (emailError) {
@@ -466,6 +499,15 @@ export default class Main extends React.Component {
         }
     }
 
+    handleEdit = (e) => {
+        e.preventDefault();
+        const isValid = this.validate();
+        if (isValid) {
+            this.editNew();
+            this.setState(initialState);
+        }
+    }
+
     renderContent() {
 
         if (this.state.active === 'home') {
@@ -501,7 +543,7 @@ export default class Main extends React.Component {
                             closeModal={this.closeModal}
                             updateHypoallergenic={this.updateHypoallergenic}
                             updateDog={this.updateDog}
-                          
+
                         />
                     </React.Fragment>
 
@@ -530,7 +572,7 @@ export default class Main extends React.Component {
                             updateHypoallergenic={this.updateHypoallergenic}
                             updateDog={this.updateDog}
 
-                           
+
                         />
                     </React.Fragment>
 
@@ -578,33 +620,37 @@ export default class Main extends React.Component {
             )
         } else if (
             // this.state.dogBeingEdited === true && 
-            this.state.active === 'updateDog'){
+            this.state.active === 'updateDog') {
             return (
                 <React.Fragment>
                     <Navigationbar
                         setActive={this.setActive}
                     />
-                    <UpdateDog
-                     dogBeingEdited={this.state.dogBeingEdited}
-                     editDogName={this.state.editDogName}
-                     editBreed={this.state.editBreed}
-                     editGender={this.state.editGender}
-                     editDateOfBirth={this.state.editDateOfBirth}
-                     editTemperament={this.state.editTemperament}
-                     editHealthStatus={this.state.editHealthStatus}
-                     editFamilyStatus={this.state.editFamilyStatus}
-                     editHypoallergenic={this.state.editHypoallergenic}
-                     editToiletTrained={this.state.editToiletTrained}
-                     editDescription={this.state.editDescription}
-                     editPictureUrl={this.state.editPictureUrl}
-                     editOwnerName={this.state.editOwnerName}
-                     editEmail={this.state.editEmail}
-                     updateDog={this.updateDog}
-                     errors={this.state.errors}
-                     updateCheckbox={this.updateCheckbox}
-                     updateFormField={this.updateFormField}
-                     updateBooleanFormField={this.updateBooleanFormField}
-                     />
+                    <UpdateDog data={this.state.data}
+                        dogBeingEdited={this.state.dogBeingEdited}
+                        editDogName={this.state.editDogName}
+                        editBreed={this.state.editBreed}
+                        editGender={this.state.editGender}
+                        editDateOfBirth={this.state.editDateOfBirth}
+                        editTemperament={this.state.editTemperament}
+                        editHealthStatus={this.state.editHealthStatus}
+                        editFamilyStatus={this.state.editFamilyStatus}
+                        editHypoallergenic={this.state.editHypoallergenic}
+                        editToiletTrained={this.state.editToiletTrained}
+                        editDescription={this.state.editDescription}
+                        editPictureUrl={this.state.editPictureUrl}
+                        editOwnerName={this.state.editOwnerName}
+                        editEmail={this.state.editEmail}
+                        updateDog={this.updateDog}
+                        errors={this.state.errors}
+                        updateCheckbox={this.updateCheckbox}
+                        updateFormField={this.updateFormField}
+                        updateBooleanFormField={this.updateBooleanFormField}
+                        handleEdit={this.handleEdit}
+                        editNew={this.editNew}
+                        modal={this.state.modal}
+                        setActive={this.setActive}
+                    />
                 </React.Fragment>
             )
         }

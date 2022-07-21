@@ -105,16 +105,6 @@ export default function Browse(props) {
                                                             type={type}
                                                             id={`inline-${type}-20`}
                                                         />
-                                                        {/* <Form.Check
-                                                            inline
-                                                            label="No"
-                                                            value=""
-                                                            name=""
-
-
-                                                            type={type}
-                                                            id={`inline-${type}-21`}
-                                                        /> */}
                                                     </div>
                                                 ))}
                                             </Form.Group>
@@ -202,7 +192,7 @@ export default function Browse(props) {
 
 
 
-                                        <Form.Group>
+                                        {/* <Form.Group>
                                             <Form.Label>Temperament</Form.Label>
                                             {['checkbox'].map((type) => (
                                                 <div key={`inline-${type}`} className="mb-4">
@@ -258,7 +248,7 @@ export default function Browse(props) {
                                                     />
                                                 </div>
                                             ))}
-                                        </Form.Group>
+                                        </Form.Group> */}
 
 
 
@@ -325,7 +315,7 @@ export default function Browse(props) {
                                         <Container>
                                             <Row>
                                                 <div className="mb-4 d-lg-flex pt-2">
-                                                    <img id="modal-img" className="img-fluid" variant="top" src={dog.pictureUrl} style={{ objectFit: "cover" }} />
+                                                    <img id="modal-img" className="img-fluid rounded" variant="top" src={dog.pictureUrl} style={{ objectFit: "cover" }} />
                                                     <p className="ps-lg-4">{dog.description[0].toUpperCase() + dog.description.slice(1)}</p>
                                                 </div>
                                                 <h4 className="mb-2 text-decoration-underline">Dog's Details</h4>
