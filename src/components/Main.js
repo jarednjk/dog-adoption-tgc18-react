@@ -538,7 +538,9 @@ export default class Main extends React.Component {
                     <Navigationbar
                         setActive={this.setActive}
                     />
-                    <Home />
+                    <Home 
+                    setActive={this.setActive}
+                    />
                 </React.Fragment>
             );
         } else if (this.state.active === 'browse') {

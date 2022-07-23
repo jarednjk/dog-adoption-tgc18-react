@@ -9,26 +9,28 @@ export default function AddDog(props) {
 
     return (
         <React.Fragment>
-            <Container className="p-5">
+            <Container className="p-3 py-sm-5">
 
 
                 <Row>
                     <Col lg={2} xl={3}></Col>
                     <Col>
-                        <h2 className="text-center">Put a Dog Up for Adoption</h2>
-                        <p className="text-center mb-5">Listing your dogs on our website reaches a bigger target audience and helps them find a FUR-ever home!</p>
+                        <img className="w-100 rounded mb-4 add-adopt-pic" src={require('../img/addDog.jpg')}></img>
+                        <h2 className="text-center">Rehome Your Dog</h2>
+                        {/* <p className="text-center mb-5">Listing your dogs on our website reaches a bigger target audience and helps them find a FUR-ever home!</p> */}
+                        <p className="mb-5">Rehoming your dog should be easy and stress-free both for you and your dog. Adogpt has created a simple, reliable, free program to help you place your dog from your loving home directly to another.</p>
                         <Form>
                             <h4 className="mb-4 text-decoration-underline">Dog Details:</h4>
                             <Form.Group className="mb-4" controlId='dogName'>
                                 <Form.Label>Dog's Name</Form.Label>
                                 <Form.Control name="dogName" value={props.dogName} onChange={props.updateFormField} />
-                                <div style={{color: 'red'}}>{props.errors.dogNameError}</div>
+                                <div style={{ color: 'red' }}>{props.errors.dogNameError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4" controlId='breed'>
                                 <Form.Label>Breed</Form.Label>
                                 <Form.Control name="breed" value={props.breed} onChange={props.updateFormField} />
-                                <div style={{color: 'red'}}>{props.errors.breedError}</div>
+                                <div style={{ color: 'red' }}>{props.errors.breedError}</div>
                             </Form.Group>
 
                             {/* <Form.Group className="mb-4" controlId='breed'>
@@ -67,13 +69,13 @@ export default function AddDog(props) {
                                         />
                                     </div>
                                 ))}
-                                    <div style={{color: 'red'}}>{props.errors.genderError}</div>
+                                <div style={{ color: 'red' }}>{props.errors.genderError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4" controlId='dateOfBirth'>
                                 <Form.Label>Estimated Date of Birth</Form.Label>
                                 <Form.Control type="date" name="dateOfBirth" value={props.dateOfBirth} onChange={props.updateFormField} />
-                                <div style={{color: 'red'}}>{props.errors.dateOfBirthError}</div>
+                                <div style={{ color: 'red' }}>{props.errors.dateOfBirthError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4">
@@ -132,7 +134,7 @@ export default function AddDog(props) {
                                         />
                                     </div>
                                 ))}
-                                    <div style={{color: 'red'}}>{props.errors.temperamentError}</div>
+                                <div style={{ color: 'red' }}>{props.errors.temperamentError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4">
@@ -237,7 +239,7 @@ export default function AddDog(props) {
                                         />
                                     </div>
                                 ))}
-                                    <div style={{color: 'red'}}>{props.errors.hypoallergenicError}</div>
+                                <div style={{ color: 'red' }}>{props.errors.hypoallergenicError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4">
@@ -266,32 +268,32 @@ export default function AddDog(props) {
                                         />
                                     </div>
                                 ))}
-                                    <div style={{color: 'red'}}>{props.errors.toiletTrainedError}</div>
+                                <div style={{ color: 'red' }}>{props.errors.toiletTrainedError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4" controlId="description">
                                 <Form.Label>Description</Form.Label>
                                 <Form.Control placeholder="Write a short description on the dog" as="textarea" rows={3} name="description" value={props.description} onChange={props.updateFormField} />
-                                <div style={{color: 'red'}}>{props.errors.descriptionError}</div>
+                                <div style={{ color: 'red' }}>{props.errors.descriptionError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-5" controlId="pictureUrl">
                                 <Form.Label>Picture</Form.Label>
                                 <Form.Control placeholder="Upload a picture of the dog in URL format" name="pictureUrl" value={props.pictureUrl} onChange={props.updateFormField} />
-                                <div style={{color: 'red'}}>{props.errors.pictureUrlError}</div>
+                                <div style={{ color: 'red' }}>{props.errors.pictureUrlError}</div>
                             </Form.Group>
 
-                            <h4 className="mb-4 text-decoration-underline">Caretaker Details:</h4>
+                            <h4 className="mb-4 text-decoration-underline">Owner Details:</h4>
                             <Form.Group className="mb-4" controlId="ownerName">
                                 <Form.Label>Your Name</Form.Label>
                                 <Form.Control placeholder="Name of individual or organization" name="ownerName" value={props.ownerName} onChange={props.updateFormField} />
-                                <div style={{color: 'red'}}>{props.errors.ownerNameError}</div>
+                                <div style={{ color: 'red' }}>{props.errors.ownerNameError}</div>
                             </Form.Group>
 
                             <Form.Group className="mb-4" controlId="email">
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control type="email" placeholder="name@example.com" name="email" value={props.email} onChange={props.updateFormField} />
-                                <div style={{color: 'red'}}>{props.errors.emailError}</div>
+                                <div style={{ color: 'red' }}>{props.errors.emailError}</div>
                             </Form.Group>
 
                             <Button onClick={handleShow} className="float-end" variant="info">Cancel</Button>{' '}
@@ -310,7 +312,7 @@ export default function AddDog(props) {
                                     <p>You can't undo this action.</p>
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button onClick={() => {props.setActive('browse')}} variant="danger">
+                                    <Button onClick={() => { props.setActive('browse') }} variant="danger">
                                         Discard Changes
                                     </Button>
                                     <Button onClick={handleClose} variant="info">Continue Editing</Button>

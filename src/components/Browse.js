@@ -6,9 +6,9 @@ export default function Browse(props) {
 
     return (
         <React.Fragment>
-            <Container fluid className="px-5">
+            <Container fluid className="px-4 px-sm-5 pb-5">
                 <h2 className="text-center pt-4 pb-2">Dogs Available for Adoption</h2>
-                <Row className="g-5">
+                <Row className="g-4 g-lg-5">
                     {/* ACCORDION */}
                     <Col lg={3}><Accordion>
                         <Accordion.Item eventKey="0">
@@ -268,10 +268,16 @@ export default function Browse(props) {
                                 <Col xs={12} md={6} lg={6} xl={4}>
                                     <Card className="h-100 rounded-3 shadow" id="card-animation">
                                         <Card.Img id="card-img" variant="top" src={dog.pictureUrl} style={{ objectFit: "cover" }} />
-                                        <Card.Body style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                        <Card.Body className="d-flex justify-content-between flex-column">
                                             <div>
+                                                <div className='d-flex'>
                                                 <Card.Title>{dog.dogName[0].toUpperCase() + dog.dogName.slice(1)}</Card.Title>
-                                                <Card.Subtitle className="mb-2 text-muted">{dog.breed[0].toUpperCase() + dog.breed.slice(1)}</Card.Subtitle>
+                                                <Card.Title className="ms-auto">DOB</Card.Title>
+                                                </div>
+                                                <div className="mb-3 text-muted d-flex justify-content-between">
+                                                <Card.Subtitle>{dog.breed[0].toUpperCase() + dog.breed.slice(1)}</Card.Subtitle>
+                                                <Card.Subtitle>{dog.dateOfBirth}</Card.Subtitle>
+                                                </div>
                                             </div>
                                             <Card.Text id="cardDescription">
                                                 {dog.description[0].toUpperCase() + dog.description.slice(1)}
@@ -283,7 +289,7 @@ export default function Browse(props) {
                                                     <Badge bg={dog.familyStatus.includes('hdbApproved') ? "secondary" : null}>HDB approved</Badge>
                                                 </div>
                                             </div>
-                                            <Button onClick={() => { props.handleModal(dog._id) }} style={{ width: "fit-content", alignSelf: 'flex-end' }} className="float-end btn-sm" variant="warning">More >></Button>
+                                            <Button onClick={() => { props.handleModal(dog._id) }} style={{ width: "fit-content", alignSelf: 'flex-end' }} className="float-end btn-sm" variant="warning">More ></Button>
                                         </Card.Body>
 
                                     </Card>
@@ -309,7 +315,7 @@ export default function Browse(props) {
                             return (
                                 <React.Fragment key={dog._id}>
                                     <Modal.Header closeButton>
-                                        <Modal.Title>{dog.dogName}</Modal.Title>
+                                        <Modal.Title>{dog.dogName[0].toUpperCase() + dog.dogName.slice(1)}</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <Container>
@@ -367,10 +373,10 @@ export default function Browse(props) {
 
                                     </Modal.Body>
                                     <Modal.Footer>
-                                        <Button onClick={() => { props.setActive('adoptionProcess') }} variant="danger">
-                                            Discard Changes
+                                        <Button onClick={() => { props.setActive('adoptionProcess') }} variant="warning">
+                                            Adoption Process
                                         </Button>
-                                        <Button onClick={ () => {props.updateDog(); props.setActive('updateDog')}} variant="info">Edit</Button>
+                                        <Button onClick={() => { props.updateDog(); props.setActive('updateDog') }} variant="info">Edit</Button>
                                     </Modal.Footer>
                                 </React.Fragment>
                             )

@@ -286,7 +286,7 @@ export default function UpdateDog(props) {
                                                 <div style={{ color: 'red' }}>{props.errors.pictureUrlError}</div>
                                             </Form.Group>
 
-                                            <h4 className="mb-4 text-decoration-underline">Caretaker Details:</h4>
+                                            <h4 className="mb-4 text-decoration-underline">Owner Details:</h4>
                                             <Form.Group className="mb-4" controlId="ownerName">
                                                 <Form.Label>Your Name</Form.Label>
                                                 <Form.Control placeholder="Name of individual or organization" name="editOwnerName" value={props.editOwnerName} onChange={props.updateFormField} />

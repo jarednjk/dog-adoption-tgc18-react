@@ -17,13 +17,10 @@ export default function Navigationbar(props) {
                         <Nav className="ms-auto">
                             <Nav.Link onClick={()=>{
                                 props.setActive('browse')
-                            }} >Browse</Nav.Link>
+                            }} >Browse Dogs</Nav.Link>
                             <Nav.Link onClick={()=>{
                                 props.setActive('add dog')
-                            }} >Add Dog</Nav.Link>
-                            <Nav.Link onClick={()=>{
-                                props.setActive('manage')
-                            }} >Manage</Nav.Link>
+                            }} >Rehome</Nav.Link>
                             <Nav.Link onClick={()=>{
                                 props.setActive('adoptionProcess')
                             }} >Adoption Process</Nav.Link>
