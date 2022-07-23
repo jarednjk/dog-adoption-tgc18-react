@@ -24,6 +24,7 @@ const initialState = {
     ownerName: "",
     email: "",
 
+    dogBeingDeleted: false,
     dogBeingEdited: false,
     editDogName: "",
     editBreed: "",
@@ -101,6 +102,27 @@ export default class Main extends React.Component {
 
     }
 
+    deleteAlert = () => {
+        this.setState({
+            dogBeingDeleted: true
+        })
+    }
+
+    cancelDeleteAlert = () => {
+        this.setState({
+            dogBeingDeleted: false
+        })
+    }
+
+    deleteDog = async () => {
+        await axios.delete(`${this.url}dog_adoption/${this.state.modal}`);
+        let response = await axios.get(this.url + 'dog_adoption');
+        this.setState({
+            'data': response.data,
+            'active': 'home'
+        })
+    }
+
     handleModal = (dogId) => {
         this.setState({
             modal: dogId
@@ -167,7 +189,7 @@ export default class Main extends React.Component {
         }
         await setTimeout(() => {
             this.getSearchResults()
-        }, 500);
+        }, 100);
     }
 
     updateFormField = (e) => {
@@ -606,6 +628,7 @@ export default class Main extends React.Component {
                         updateCheckbox={this.updateCheckbox}
                         errors={this.state.errors}
                         handleSubmit={this.handleSubmit}
+                        active={this.state.active}
                     />
                 </React.Fragment>
             )
@@ -650,6 +673,11 @@ export default class Main extends React.Component {
                         editNew={this.editNew}
                         modal={this.state.modal}
                         setActive={this.setActive}
+                        dogBeingDeleted={this.state.dogBeingDeleted}
+                        deleteAlert={this.deleteAlert}
+                        cancelDeleteAlert={this.cancelDeleteAlert}
+                        deleteDog={this.deleteDog}
+                        active={this.state.active}
                     />
                 </React.Fragment>
             )

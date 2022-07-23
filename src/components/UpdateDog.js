@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Container, Row, Button, Modal, Col } from 'react-bootstrap';
+import { Form, Container, Row, Button, Modal, Col, Alert } from 'react-bootstrap';
 
 export default function UpdateDog(props) {
 
@@ -17,11 +17,11 @@ export default function UpdateDog(props) {
                                 <React.Fragment key={dog._id}>
                                     <Col lg={2} xl={3}></Col>
                                     <Col>
-                                    <div>
-                                    <h2 className="text-center mb-3">You are currently editing for {dog.dogName}...</h2>
-                                        <img id="edit-img" className="img-fluid mb-5 rounded" variant="top" src={dog.pictureUrl} style={{ objectFit: "cover" }} />
-                                    </div>
-                                        
+                                        <div>
+                                            <h2 className="text-center mb-3">You are currently editing for {dog.dogName[0].toUpperCase() + dog.dogName.slice(1)}...</h2>
+                                            <img id="edit-img" className="img-fluid mb-5 rounded" variant="top" src={dog.pictureUrl} style={{ objectFit: "cover" }} />
+                                        </div>
+
                                         <Form>
                                             <h4 className="mb-4 text-decoration-underline">Dog Details:</h4>
                                             <Form.Group className="mb-4" controlId='dogName'>
@@ -299,28 +299,40 @@ export default function UpdateDog(props) {
                                                 <div style={{ color: 'red' }}>{props.errors.emailError}</div>
                                             </Form.Group>
 
-                                            <Button onClick={() => {props.setActive('browse')}} className="float-end" variant="info">Cancel</Button>{' '}
+                                            <Alert className="mb-4" variant="danger" show={props.dogBeingDeleted}>
+                                                <Alert.Heading>Deleting a dog record...</Alert.Heading>
+                                                <p>Are you sure you want to delete {dog.dogName[0].toUpperCase() + dog.dogName.slice(1)}?</p>
+                                                <p>If you click "Confirm Delete", {dog.dogName[0].toUpperCase() + dog.dogName.slice(1)} will be permanently removed from the database.</p> 
+                                                <p>Warning: This action cannot be undone!</p>
+                                                <Button className="me-2" variant="info" onClick={props.cancelDeleteAlert}>Cancel</Button>
+                                                <Button variant="danger" onClick={props.deleteDog}>Confirm Delete</Button>
+                                            </Alert>
+
+                                            <Button onClick={handleShow} className="float-end" variant="info">Cancel</Button>{' '}
                                             <Button onClick={props.handleEdit} className="float-end mx-2" variant="warning">Update</Button>{' '}
-                                            {/* 
-                            <Modal
-                                show={show}
-                                onHide={handleClose}
-                            >
-                                <Modal.Header closeButton>
-                                    <Modal.Title>Confirm Discard Changes</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <p>You've made changes that haven't been published yet</p>
-                                    <p>If you discard changes, your unpublished changes will be deleted.</p>
-                                    <p>You can't undo this action.</p>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button onClick={() => { props.setActive('browse') }} variant="danger">
-                                        Discard Changes
-                                    </Button>
-                                    <Button onClick={handleClose} variant="info">Continue Editing</Button>
-                                </Modal.Footer>
-                            </Modal> */}
+                                            <Button onClick={props.deleteAlert} variant="danger">Delete</Button>
+
+                                            
+
+                                            <Modal
+                                                show={show}
+                                                onHide={handleClose}
+                                            >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title>Confirm discard changes for {dog.dogName[0].toUpperCase() + dog.dogName.slice(1)}?</Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                    <p>You've made changes that haven't been published yet.</p>
+                                                    <p>If you discard changes, your unpublished changes will be deleted.</p>
+                                                    <p>You can't undo this action.</p>
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button onClick={() => { props.setActive('browse') }} variant="danger">
+                                                        Discard Changes
+                                                    </Button>
+                                                    <Button onClick={handleClose} variant="info">Continue Editing</Button>
+                                                </Modal.Footer>
+                                            </Modal>
 
 
                                         </Form>
