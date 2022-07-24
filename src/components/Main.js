@@ -42,11 +42,13 @@ const initialState = {
 
     dataFiltered: [],
     keywordSearch: "",
+    gteYearSearch: "",
+    lteYearSearch: "",
     genderSearch: 'all',
     hypoallergenicSearch: false,
     healthSearch: [],
     familySearch: [],
-    temperamentSearch: [],
+    // temperamentSearch: [],
 
     errors: {
         dogNameError: "",
@@ -119,7 +121,7 @@ export default class Main extends React.Component {
         let response = await axios.get(this.url + 'dog_adoption');
         this.setState({
             'data': response.data,
-            'active': 'home'
+            'active': 'browse'
         })
     }
 
@@ -241,7 +243,8 @@ export default class Main extends React.Component {
             params: {
                 gender: this.state.genderSearch,
                 search: this.state.keywordSearch,
-                dateOfBirth: this.state.dateOfBirthSearch,
+                gteyear: this.state.gteYearSearch,
+                lteyear: this.state.lteYearSearch,
                 hypoallergenic: this.state.hypoallergenicSearch,
                 healthStatus: this.state.healthSearch,
                 familyStatus: this.state.familySearch,
@@ -273,14 +276,14 @@ export default class Main extends React.Component {
                 email: this.state.editEmail
             }
         }
-        console.log("Modal==>" ,this.state.modal)
+        console.log("Modal==>", this.state.modal)
         let editId = this.state.modal
         await axios.put(`${this.url}dog_adoption/${this.state.modal}`, updateDog)
-        
+
         let response = await axios.get(this.url + 'dog_adoption');
 
         console.log(editId)
-        let index = this.state.data.findIndex ( d => d._id === editId);
+        let index = this.state.data.findIndex(d => d._id === editId);
         console.log(index)
 
         this.setState({
@@ -329,7 +332,7 @@ export default class Main extends React.Component {
                     email: this.state.email
                 }
             }
-
+            console.log(newDog);
             this.setState({
                 'data': [...this.state.data, newDog],
                 'active': 'browse',
@@ -510,13 +513,12 @@ export default class Main extends React.Component {
         return !hasErrors;
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
         console.log('handle submit called')
-        const isValid = this.validate();
+        const isValid = await this.validate();
         if (isValid) {
             this.addNew();
-            console.log(this.state);
             this.setState(initialState);
         }
     }
@@ -538,8 +540,8 @@ export default class Main extends React.Component {
                     <Navigationbar
                         setActive={this.setActive}
                     />
-                    <Home 
-                    setActive={this.setActive}
+                    <Home
+                        setActive={this.setActive}
                     />
                 </React.Fragment>
             );
@@ -556,8 +558,10 @@ export default class Main extends React.Component {
                             genderSearch={this.state.genderSearch}
                             healthSearch={this.state.healthSearch}
                             familySearch={this.state.familySearch}
+                            gteYearSearch={this.state.gteYearSearch}
+                            lteYearSearch={this.state.lteYearSearch}
                             hypoallergenicSearch={this.state.hypoallergenicSearch}
-                            temperamentSearch={this.state.temperamentSearch}
+                            // temperamentSearch={this.state.temperamentSearch}
                             updateSearchCheckbox={this.updateSearchCheckbox}
                             updateSearchFormField={this.updateSearchFormField}
                             updateFormField={this.updateFormField}
@@ -584,8 +588,10 @@ export default class Main extends React.Component {
                             genderSearch={this.state.genderSearch}
                             healthSearch={this.state.healthSearch}
                             familySearch={this.state.familySearch}
+                            gteYearSearch={this.state.gteYearSearch}
+                            lteYearSearch={this.state.lteYearSearch}
                             hypoallergenicSearch={this.state.hypoallergenicSearch}
-                            temperamentSearch={this.state.temperamentSearch}
+                            // temperamentSearch={this.state.temperamentSearch}
                             updateSearchCheckbox={this.updateSearchCheckbox}
                             updateSearchFormField={this.updateSearchFormField}
                             updateFormField={this.updateFormField}
@@ -595,8 +601,6 @@ export default class Main extends React.Component {
                             modal={this.state.modal}
                             updateHypoallergenic={this.updateHypoallergenic}
                             updateDog={this.updateDog}
-
-
                         />
                     </React.Fragment>
 
@@ -687,8 +691,20 @@ export default class Main extends React.Component {
     }
 
     setActive = (page) => {
+        console.log(this.state.data)
+
         this.setState({
-            'active': page
+            active: page,
+            dogBeingDeleted: false,
+            dataFiltered: [],
+            genderSearch: 'all',
+            keywordSearch: "",
+            gteYearSearch: "",
+            lteYearSearch: "",
+            hypoallergenicSearch: false,
+            healthSearch: [],
+            familySearch: [],
+            errors: {}       
         })
     }
 

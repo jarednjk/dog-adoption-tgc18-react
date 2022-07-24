@@ -17,8 +17,7 @@ export default function AddDog(props) {
                     <Col>
                         <img className="w-100 rounded mb-4 add-adopt-pic" src={require('../img/addDog.jpg')}></img>
                         <h2 className="text-center">Rehome Your Dog</h2>
-                        {/* <p className="text-center mb-5">Listing your dogs on our website reaches a bigger target audience and helps them find a FUR-ever home!</p> */}
-                        <p className="mb-5">Rehoming your dog should be easy and stress-free both for you and your dog. Adogpt has created a simple, reliable, free program to help you place your dog from your loving home directly to another.</p>
+                        <p className="mb-5">Rehoming your dog should be easy and stress-free both for you and your dog. ADOGPT has created a simple, reliable, free program to help you place your dog from your loving home directly to another.</p>
                         <Form>
                             <h4 className="mb-4 text-decoration-underline">Dog Details:</h4>
                             <Form.Group className="mb-4" controlId='dogName'>

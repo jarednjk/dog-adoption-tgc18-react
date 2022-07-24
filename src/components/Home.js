@@ -23,7 +23,7 @@ export default function Home(props) {
                             <div className="text-center px-5 mx-xl-5 d-flex flex-column justify-content-between">
                                 <img className="align-self-center" src={require('../img/rehomeDog.png')} style={{ width: '80px' }}></img>
                                 <h2>Rehome A Dog</h2>
-                                <p>Did you know we’re assisting pet owners who can no longer care for their pets to find new loving homes for them? Rehome can help!</p>
+                                <p>Did you know we’re assisting dog owners who can no longer care for their dogs to find new loving homes for them? Rehome can help!</p>
                                 <div>
                                     <Button onClick={() => { props.setActive('add dog') }} variant="info">Learn More ></Button>
                                     {/* <h5 onClick={()=>{props.setActive('add dog')}} className='hover-underline-animation'>Learn More ></h5> */}
@@ -34,7 +34,7 @@ export default function Home(props) {
                             <div className="text-center px-5 mx-xl-5 d-flex flex-column justify-content-between mb-5 mb-lg-0">
                                 <img className="align-self-center" src={require('../img/adoptionProcess.png')} style={{ width: '80px' }}></img>
                                 <h2>Adoption Process</h2>
-                                <p>Get the breakdown on how to use Adogpt and navigate the pet adoption process. Learn why you should consider adopting over buying!</p>
+                                <p>Get the breakdown on how to use ADOGPT and navigate the dog adoption process. Learn why you should consider adopting over buying!</p>
                                 <div>
                                     <Button onClick={() => { props.setActive('adoptionProcess') }} variant="info">Learn More ></Button>
                                     {/* <h5 onClick={()=>{props.setActive('adoptionProcess')}} className='hover-underline-animation mb-5 mb-lg-0'>Learn More ></h5> */}

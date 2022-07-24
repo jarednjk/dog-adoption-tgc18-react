@@ -9,7 +9,7 @@ export default function AdoptionProcess(props) {
                     <Col lg={2} xl={3}></Col>
                     <Col>
                         <img className="w-100 rounded mb-4 add-adopt-pic" src={require('../img/adopt.jpg')}></img>
-                        <h2 className="text-center">Why Adoption over Buying?</h2>
+                        <h2 className="text-center">Why Adopting over Buying?</h2>
                         <p>Did you know that over 1,000 people per hour run a search right here looking to adopt a dog? Dog adoption is quickly becoming the preferred way to find a new dog with many benefits such as:<br/>
                                     <br/>1) Dog adoption fees are usually much lower than buying from a breeder. 
                                     <br/>2) You’re likely to find a dog who’s already learned a few things. 
@@ -17,16 +17,6 @@ export default function AdoptionProcess(props) {
                                     <br/>4) Lastly, don’t forget the wonderful feeling you get from saving a life!</p>
                         <h2 className="text-center mt-5">Adoption Process</h2>
                         <Accordion defaultActiveKey="0">
-                            {/* <Accordion.Item eventKey="0">
-                                <Accordion.Header>Step 0: Why Adoption over Buying</Accordion.Header>
-                                <Accordion.Body>
-                                    Did you know that over 1,000 people per hour run a search right here looking to adopt a dog? Dog adoption is quickly becoming the preferred way to find a new dog with many benefits to it.<br/>
-                                    <br/>1) Dog adoption fees are usually much lower than buying from a breeder. 
-                                    <br/>2) You’re likely to find a dog who’s already learned a few things. 
-                                    <br/>3) Adoptable dogs are often already housetrained, good with kids, and do well with other pets. 
-                                    <br/>4) Lastly, don’t forget the wonderful feeling you get from saving a life!
-                                </Accordion.Body>
-                            </Accordion.Item> */}
                             <Accordion.Item eventKey="1">
                                 <Accordion.Header>Step 1: Finding a Suitable Dog for You</Accordion.Header>
                                 <Accordion.Body>
@@ -36,7 +26,7 @@ export default function AdoptionProcess(props) {
                             <Accordion.Item eventKey="2">
                                 <Accordion.Header>Step 2: Setting Up for a Visit</Accordion.Header>
                                 <Accordion.Body>
-                                    After you've found a dog that you are interested in, you can contact the owner by dropping an email to arrange for a visit. The contact details of the owner can be found by clicking "More>>" on the card.
+                                    After you've found a dog that you are interested in, you can contact the owner by dropping an email to arrange for a visit. The contact details of the owner can be found by clicking "More" on the card.
                                 </Accordion.Body>
                             </Accordion.Item>
                             <Accordion.Item eventKey="3">

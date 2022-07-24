@@ -12,6 +12,14 @@ code {
     monospace;
 }
 
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+p {
+  font-family: 'Roboto', sans-serif;
+}
+
 #cardDescription {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -24,6 +32,7 @@ code {
 
 #card-img {
   height: 300px;
+  object-fit: cover;
 }
 
 
@@ -42,6 +51,7 @@ code {
 #modal-img {
   min-width: 100%;
   height: 300px;
+  object-fit: cover;
 }
 
 #edit-img {
@@ -70,7 +80,7 @@ code {
   position: relative;
 }
 
-#home-banner > img {
+#home-banner>img {
   height: 50vh;
   object-fit: cover;
   opacity: 1;
@@ -79,15 +89,15 @@ code {
 }
 
 #cta {
-    left: 50%;
-    margin: auto;
-    position: absolute;
-    text-align: center;
-    top: 55%;
-    transform: translate(-50%,-20%);
-    width: 100%;
-    z-index: 2;
-    color: white;
+  left: 50%;
+  margin: auto;
+  position: absolute;
+  text-align: center;
+  top: 55%;
+  transform: translate(-50%, -20%);
+  width: 100%;
+  z-index: 2;
+  color: white;
 }
 
 .add-adopt-pic {
@@ -110,7 +120,7 @@ code {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color:rgb(9, 185, 244);
+  background-color: rgb(9, 185, 244);
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }
@@ -120,19 +130,30 @@ code {
   transform-origin: bottom left;
 }
 
+.ageSearch {
+  width: 100%;
+}
+
+/* #ageSearch {
+  width: 100%;
+} */
+
 /* for sm screen size */
 @media screen and (min-width: 768px) {
   .mdSearchSm {
     width: 50%;
   }
-}
 
-
-
-/* for md screen size and above */
-@media screen and (min-width: 768px) {
   #card-img {
     height: 250px;
+  }
+
+  #ageSearch {
+    width: 50%;
+  }
+
+  .ageSearch {
+    width: 100%
   }
 
   .mdSearch {
@@ -147,12 +168,19 @@ code {
   .add-adopt-pic {
     height: 300px;
   }
-
 }
+
+
+
+
 
 /* for lg screen size and above */
 @media screen and (min-width: 992px) {
   .mdSearch {
+    width: 100%;
+  }
+
+  #ageSearch {
     width: 100%;
   }
 
