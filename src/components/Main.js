@@ -6,9 +6,11 @@ import Browse from './Browse';
 import AddDog from './AddDog';
 import AdoptionProcess from './AdoptionProcess';
 import UpdateDog from './UpdateDog';
+import Loading from './Loading';
 
 const initialState = {
     active: 'home',
+    loaded: false,
     modal: null,
     dogName: "",
     breed: "",
@@ -76,7 +78,8 @@ export default class Main extends React.Component {
     async componentDidMount() {
         let response = await axios.get(this.url + 'dog_adoption');
         this.setState({
-            data: response.data
+            data: response.data,
+            loaded: true
         })
     }
 
@@ -533,8 +536,12 @@ export default class Main extends React.Component {
     }
 
     renderContent() {
-
-        if (this.state.active === 'home') {
+        if (this.state.loaded === false) {
+            return (
+                <Loading />
+            )
+        }
+        else if (this.state.active === 'home') {
             return (
                 <React.Fragment>
                     <Navigationbar

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, Container, Row, Accordion, Button, Col } from 'react-bootstrap';
+import { Form, Container, Row, Accordion, Col } from 'react-bootstrap';
 
-export default function AdoptionProcess(props) {
+export default function AdoptionProcess() {
     return (
         <React.Fragment>
             <Container className="p-3 py-sm-5">
@@ -18,13 +18,13 @@ export default function AdoptionProcess(props) {
                         <h2 className="text-center mt-5">Adoption Process</h2>
                         <Accordion defaultActiveKey="0">
                             <Accordion.Item eventKey="1">
-                                <Accordion.Header>Step 1: Finding a Suitable Dog for You</Accordion.Header>
+                                <Accordion.Header>Step 1: Finding a Suitable Dog</Accordion.Header>
                                 <Accordion.Body>
                                     Click on 'Browse Dogs' in the navigation bar to see the dogs currently available for adoption. Over there, you can make use of the search function to filter the type of dogs depending on your needs.
                                 </Accordion.Body>
                             </Accordion.Item>
                             <Accordion.Item eventKey="2">
-                                <Accordion.Header>Step 2: Setting Up for a Visit</Accordion.Header>
+                                <Accordion.Header>Step 2: Arranging for a Visit</Accordion.Header>
                                 <Accordion.Body>
                                     After you've found a dog that you are interested in, you can contact the owner by dropping an email to arrange for a visit. The contact details of the owner can be found by clicking "More" on the card.
                                 </Accordion.Body>

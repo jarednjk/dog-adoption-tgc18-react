@@ -12,8 +12,6 @@ code {
     monospace;
 }
 
-
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 p {
@@ -25,7 +23,6 @@ p {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  /* number of lines to show */
   line-clamp: 3;
   -webkit-box-orient: vertical;
 }

@@ -1,0 +1,67 @@
+.spinner {
+    top: 275px;
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    overflow: hidden;
+    position: relative;
+    animation: text-color 2s ease-in-out infinite;
+}
+
+.spinner-sector {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 15px solid transparent;
+    animation: rotate var(--duration) var(--timing) infinite;
+    pointer-events: none;
+}
+
+.spinner-sector-one {
+    border-top-color: #dc3545;
+    --duration: 1.5s;
+    --timing: ease-in-out;
+}
+
+.spinner-sector-two {
+    border-left-color: #0dcaf0;
+    --duration: 1.5s;
+    --timing: ease-in;
+}
+
+.spinner-sector-three {
+    border-right-color: #ffc107;
+    --duration: 1.5s;
+    --timing: ease-out;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes text-color {
+
+    0%,
+    100% {
+        color: rgba(0, 0, 0, 1)
+    }
+
+    25%,
+    75% {
+        color: rgba(0, 0, 0, .5)
+    }
+
+    50% {
+        color: rgba(0, 0, 0, .1)
+    }
+}
