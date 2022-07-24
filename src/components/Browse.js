@@ -218,7 +218,7 @@ export default function Browse(props) {
 
 
 
-                                        {/* <Form.Group>
+                                        <Form.Group>
                                             <Form.Label>Temperament</Form.Label>
                                             {['checkbox'].map((type) => (
                                                 <div key={`inline-${type}`} className="mb-4">
@@ -274,7 +274,7 @@ export default function Browse(props) {
                                                     />
                                                 </div>
                                             ))}
-                                        </Form.Group> */}
+                                        </Form.Group>
 
 
 

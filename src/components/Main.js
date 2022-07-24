@@ -48,7 +48,7 @@ const initialState = {
     hypoallergenicSearch: false,
     healthSearch: [],
     familySearch: [],
-    // temperamentSearch: [],
+    temperamentSearch: [],
 
     errors: {
         dogNameError: "",
@@ -561,7 +561,7 @@ export default class Main extends React.Component {
                             gteYearSearch={this.state.gteYearSearch}
                             lteYearSearch={this.state.lteYearSearch}
                             hypoallergenicSearch={this.state.hypoallergenicSearch}
-                            // temperamentSearch={this.state.temperamentSearch}
+                            temperamentSearch={this.state.temperamentSearch}
                             updateSearchCheckbox={this.updateSearchCheckbox}
                             updateSearchFormField={this.updateSearchFormField}
                             updateFormField={this.updateFormField}
@@ -591,7 +591,7 @@ export default class Main extends React.Component {
                             gteYearSearch={this.state.gteYearSearch}
                             lteYearSearch={this.state.lteYearSearch}
                             hypoallergenicSearch={this.state.hypoallergenicSearch}
-                            // temperamentSearch={this.state.temperamentSearch}
+                            temperamentSearch={this.state.temperamentSearch}
                             updateSearchCheckbox={this.updateSearchCheckbox}
                             updateSearchFormField={this.updateSearchFormField}
                             updateFormField={this.updateFormField}
@@ -702,9 +702,10 @@ export default class Main extends React.Component {
             gteYearSearch: "",
             lteYearSearch: "",
             hypoallergenicSearch: false,
+            temperamentSearch: [],
             healthSearch: [],
             familySearch: [],
-            errors: {}       
+            errors: {}
         })
     }
 

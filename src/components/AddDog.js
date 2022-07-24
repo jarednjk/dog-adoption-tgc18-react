@@ -311,7 +311,7 @@ export default function AddDog(props) {
                                     <p>You can't undo this action.</p>
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button onClick={() => { props.setActive('browse') }} variant="danger">
+                                    <Button onClick={() => { props.setActive('home') }} variant="danger">
                                         Discard Changes
                                     </Button>
                                     <Button onClick={handleClose} variant="info">Continue Editing</Button>
