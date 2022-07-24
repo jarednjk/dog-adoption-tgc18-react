@@ -27,8 +27,8 @@ export default function Browse(props) {
                                                     onChange={props.updateSearchFormField} />
                                             </Form.Group>
 
-                                            <div id="ageSearch" className="mb-4 d-sm-flex d-lg-block">
-                                                <Form.Group className="ageSearch pe-sm-3 pe-md-1 pe-lg-0" controlId="gteYearSearch">
+                                            <div id="ageSearch" className="mb-4 d-flex d-lg-block">
+                                                <Form.Group className="ageSearch pe-3 pe-md-1 pe-lg-0" controlId="gteYearSearch">
                                                     <Form.Label>Born After Year</Form.Label>
                                                     <Form.Control
                                                         type="text"
@@ -49,38 +49,10 @@ export default function Browse(props) {
                                                         onChange={props.updateSearchFormField} />
                                                 </Form.Group>
                                             </div>
-
-
-
-                                            {/* <Form.Group className="mdSearchSm mb-4" controlId="sortAge">
-                                                <Form.Label>Sort Age by</Form.Label>
-                                                {['radio'].map((type) => (
-                                                    <div key={`inline-${type}`}>
-                                                        <Form.Check
-                                                            inline
-                                                            label="Young > Old"
-                                                            value=""
-                                                            name="dateOfBirth"
-
-                                                            type={type}
-                                                            id={`inline-${type}-7`}
-                                                        />
-                                                        <Form.Check
-                                                            inline
-                                                            label="Old > Young"
-                                                            value=""
-                                                            name="dateOfBirth"
-
-                                                            type={type}
-                                                            id={`inline-${type}-8`}
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </Form.Group> */}
                                         </div>
 
                                         <div className="d-sm-flex justify-content-sm-between d-lg-block mb-4 mb-sm-0">
-                                            <Form.Group className="pe-sm-3 pe-lg-0 mdSearchSm">
+                                            <Form.Group className="pe-3 pe-lg-0 mdSearchSm">
                                                 <Form.Label>Gender</Form.Label>
                                                 {['radio'].map((type) => (
                                                     <div key={`inline-${type}`} className="mb-4">
@@ -417,12 +389,7 @@ export default function Browse(props) {
                     )}
                 </Modal>
 
-
-
-
-
             </Container>
-
 
         </React.Fragment>
 

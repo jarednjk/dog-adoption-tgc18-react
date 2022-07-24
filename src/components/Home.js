@@ -34,7 +34,7 @@ export default function Home(props) {
                             <div className="text-center px-5 mx-xl-5 d-flex flex-column justify-content-between mb-5 mb-lg-0">
                                 <img className="align-self-center" src={require('../img/adoptionProcess.png')} style={{ width: '80px' }}></img>
                                 <h2>Adoption Process</h2>
-                                <p>Get the breakdown on how to use ADOGPT and navigate the dog adoption process. Learn why you should consider adopting over buying!</p>
+                                <p>Get the breakdown on how to use Adogpt and navigate the dog adoption process. Learn why you should consider adopting over buying!</p>
                                 <div>
                                     <Button onClick={() => { props.setActive('adoptionProcess') }} variant="info">Learn More ></Button>
                                     {/* <h5 onClick={()=>{props.setActive('adoptionProcess')}} className='hover-underline-animation mb-5 mb-lg-0'>Learn More ></h5> */}
