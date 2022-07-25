@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Container, Nav, Navbar} from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 
 export default function Navigationbar(props) {
 
@@ -9,19 +9,19 @@ export default function Navigationbar(props) {
         <React.Fragment>
             <Navbar bg="info" variant="light" expand="lg" expanded={expanded}>
                 <Container>
-                    <Nav.Link onClick={()=>{
+                    <Nav.Link onClick={() => {
                         props.setActive('home')
-                    }}><img src={require('../img/adogpt.png')} style={{height: '30px'}}/></Nav.Link>
+                    }}><img src={require('../img/adogpt.png')} style={{ height: '30px' }} /></Nav.Link>
                     <Navbar.Toggle onClick={() => setExpanded(expanded ? false : "expanded")} aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <Nav.Link onClick={()=>{
+                            <Nav.Link onClick={() => {
                                 props.setActive('browse')
                             }} >Browse Dogs</Nav.Link>
-                            <Nav.Link onClick={()=>{
+                            <Nav.Link onClick={() => {
                                 props.setActive('add dog')
                             }} >Rehome</Nav.Link>
-                            <Nav.Link onClick={()=>{
+                            <Nav.Link onClick={() => {
                                 props.setActive('adoptionProcess')
                             }} >Adoption Process</Nav.Link>
                         </Nav>

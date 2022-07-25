@@ -14,6 +14,19 @@ code {
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+.swal2-icon.swal2-warning {
+  border-color: #dc3545 !important;
+  color: #dc3545 !important;
+}
+
+.swal2-styled.swal2-cancel {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: #dc3545 !important;
+}
+
 p {
   font-family: 'Roboto', sans-serif;
 }
@@ -96,6 +109,7 @@ p {
   z-index: 2;
   color: white;
 }
+
 
 .add-adopt-pic {
   height: 200px;

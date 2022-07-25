@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# Adogpt
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The live demo of the React frontend web application can be accessed [here].
+The backend API implementation can be accessed [here].
 
-## Available Scripts
+## Project Summary
 
-In the project directory, you can run:
+### Project Context
 
-### `npm start`
+Adogpt is a mobile responsive web application that allows users to rehome or adopt a dog. For dog owners who wish to rehome their dogs, they can create, update and delete a dog profile. For new dog owners, they can read and get information of the dog adoption listings. It is developed using the MERN (MongoDB, ExpressJS, React, NodeJS) stack.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Target Audience
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+It is targeted mainly at individual dog owners who wish to rehome their dogs as well as new dog owners who are looking at adoption over buying. Organisations usually already have their own dog adoption websites, but they are more than welcome to list with us to get more outreach.
 
-### `npm test`
+### Justification for the App
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Strategy
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+User of my website are people are generally dog lovers who are either current dog owners or future dog owners. Current dog owners might put their pet up for adoption for certain reasons. Future dog owners may prefer to adopt instead of buy as there is no upfront cost to buy them as well as other reasons. However, they also want important information to see if the dog is healthy and a good fit for their criterias.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+My users may not be able to find all the critical information such as hdb approved, hypoallergenic, and health status. I also noticed that certain pet adoption websites are too complicated, making it difficult for the users to navigate to browse the dogs available for adoption.

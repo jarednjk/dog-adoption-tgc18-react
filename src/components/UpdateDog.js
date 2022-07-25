@@ -36,16 +36,6 @@ export default function UpdateDog(props) {
                                                 <div style={{ color: 'red' }}>{props.errors.breedError}</div>
                                             </Form.Group>
 
-                                            {/* <Form.Group className="mb-4" controlId='breed'>
-                <Form.Label>Breed</Form.Label>
-                <Form.Select aria-label="Default select example">
-                    <option>Select a breed</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </Form.Select>
-            </Form.Group> */}
-
                                             <Form.Group className="mb-4">
                                                 <Form.Label>Gender</Form.Label>
                                                 {['radio'].map((type) => (
@@ -107,10 +97,10 @@ export default function UpdateDog(props) {
                                                         />
                                                         <Form.Check
                                                             inline
-                                                            label="Active"
-                                                            value="active"
+                                                            label="Laid-back"
+                                                            value="laid-back"
                                                             name="editTemperament"
-                                                            checked={props.editTemperament.includes('active')}
+                                                            checked={props.editTemperament.includes('laid-back')}
                                                             onChange={props.updateCheckbox}
                                                             type={type}
                                                             id={`inline-${type}-3`}
@@ -299,19 +289,20 @@ export default function UpdateDog(props) {
                                                 <div style={{ color: 'red' }}>{props.errors.emailError}</div>
                                             </Form.Group>
 
-                                            <Alert className="mb-4" variant="danger" show={props.dogBeingDeleted}>
+                                            {/* <Alert className="mb-4" variant="danger" show={props.dogBeingDeleted}>
                                                 <Alert.Heading>Deleting a dog record...</Alert.Heading>
                                                 <p>Are you sure you want to delete {dog.dogName[0].toUpperCase() + dog.dogName.slice(1)}?</p>
                                                 <p>If you click "Confirm Delete", {dog.dogName[0].toUpperCase() + dog.dogName.slice(1)} will be permanently removed from the database.</p>
                                                 <p>Warning: This action cannot be undone!</p>
                                                 <Button className="me-2" variant="info" onClick={props.cancelDeleteAlert}>Cancel</Button>
                                                 <Button variant="danger" onClick={props.deleteDog}>Confirm Delete</Button>
-                                            </Alert>
+                                            </Alert> */}
 
                                             <Button onClick={handleShow} className="float-end" variant="info">Cancel</Button>{' '}
                                             <Button onClick={props.handleEdit} className="float-end mx-2" variant="warning">Update</Button>{' '}
                                             <Button onClick={props.deleteAlert} variant="danger">Delete</Button>
 
+                                
                                         </Form>
 
                                         <Modal

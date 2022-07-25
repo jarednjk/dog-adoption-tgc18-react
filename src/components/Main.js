@@ -7,6 +7,7 @@ import AddDog from './AddDog';
 import AdoptionProcess from './AdoptionProcess';
 import UpdateDog from './UpdateDog';
 import Loading from './Loading';
+import Swal from 'sweetalert2';
 
 const initialState = {
     active: 'home',
@@ -26,7 +27,7 @@ const initialState = {
     ownerName: "",
     email: "",
 
-    dogBeingDeleted: false,
+    // dogBeingDeleted: false,
     dogBeingEdited: false,
     editDogName: "",
     editBreed: "",
@@ -78,7 +79,8 @@ export default class Main extends React.Component {
     async componentDidMount() {
         let response = await axios.get(this.url + 'dog_adoption');
         this.setState({
-            data: response.data,
+            // data: response.data,
+            dataFiltered: response.data,
             loaded: true
         })
     }
@@ -86,8 +88,6 @@ export default class Main extends React.Component {
     updateDog = async () => {
 
         let response = await axios.get(`${this.url}dog_adoption/${this.state.modal}`);
-        console.log(response.data);
-        // this.handleModal( response.data._id )
         this.setState({
             editDogName: response.data.dogName,
             editBreed: response.data.breed,
@@ -103,28 +103,48 @@ export default class Main extends React.Component {
             editOwnerName: response.data.owner.ownerName,
             editEmail: response.data.owner.email,
             dogBeingEdited: true,
+            loaded: true
         })
 
     }
 
     deleteAlert = () => {
-        this.setState({
-            dogBeingDeleted: true
-        })
+        Swal.fire({
+            title: 'Warning: This action is irrevisible!',
+            text: "If you click 'Confirm Delete', this dog will be permanently removed from the database.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#0dcaf0',
+            confirmButtonText: 'Confirm Delete'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Deleted!',
+                'Your data has been removed.',
+                'success',
+                this.deleteDog()
+              )
+            }
+          })
     }
 
-    cancelDeleteAlert = () => {
-        this.setState({
-            dogBeingDeleted: false
-        })
-    }
+    // cancelDeleteAlert = () => {
+    //     this.setState({
+    //         dogBeingDeleted: false
+    //     })
+    // }
 
     deleteDog = async () => {
+        Swal.fire({
+            template: '#my-template'
+        })
         await axios.delete(`${this.url}dog_adoption/${this.state.modal}`);
         let response = await axios.get(this.url + 'dog_adoption');
         this.setState({
-            'data': response.data,
-            'active': 'browse'
+            'dataFiltered': response.data,
+            'active': 'browse',
+            'modal': null
         })
     }
 
@@ -141,7 +161,6 @@ export default class Main extends React.Component {
     }
 
     updateHypoallergenic = async (e) => {
-        console.log(e.target.value)
         let newData
         this.state.hypoallergenicSearch === false ? newData = true : newData = false;
 
@@ -254,7 +273,6 @@ export default class Main extends React.Component {
                 temperament: this.state.temperamentSearch
             }
         })
-        console.log(response.data)
         this.setState({
             dataFiltered: response.data
         })
@@ -279,19 +297,30 @@ export default class Main extends React.Component {
                 email: this.state.editEmail
             }
         }
-        console.log("Modal==>", this.state.modal)
         let editId = this.state.modal
         await axios.put(`${this.url}dog_adoption/${this.state.modal}`, updateDog)
 
         let response = await axios.get(this.url + 'dog_adoption');
 
-        console.log(editId)
-        let index = this.state.data.findIndex(d => d._id === editId);
-        console.log(index)
+        // let index = this.state.data.findIndex(d => d._id === editId);
 
         this.setState({
-            'data': response.data,
+            'dataFiltered': response.data,
             'active': 'browse',
+            editDogName: "",
+            editBreed: "",
+            editGender: "",
+            editDateOfBirth: "",
+            editTemperament: [],
+            editHealthStatus: [],
+            editFamilyStatus: [],
+            editHypoallergenic: "",
+            editToiletTrained: "",
+            editDescription: "",
+            editPictureUrl: "",
+            editOwnerName: "",
+            editEmail: "",
+            errors: {}
         })
     }
 
@@ -335,13 +364,28 @@ export default class Main extends React.Component {
                     email: this.state.email
                 }
             }
-            console.log(newDog);
             this.setState({
-                'data': [...this.state.data, newDog],
+                'dataFiltered': [...this.state.dataFiltered, newDog],
                 'active': 'browse',
+                modal: null,
+                dogName: "",
+                breed: "",
+                gender: "",
+                dateOfBirth: "",
+                temperament: [],
+                healthStatus: [],
+                familyStatus: [],
+                hypoallergenic: "",
+                toiletTrained: "",
+                description: "",
+                pictureUrl: "",
+                ownerName: "",
+                email: "",
+                errors: {},
+                dogBeingEdited: true
             })
         } catch (e) {
-            alert('Error listing new dog. Please contact administrator.')
+            alert('Error listing new dog. Please contact administrator. (Create Error)')
         }
     }
 
@@ -416,7 +460,6 @@ export default class Main extends React.Component {
         }
 
         if ((!hypoallergenic && hypoallergenic !== false) && (!this.state.editHypoallergenic && this.state.editHypoallergenic !== false)) {
-            console.log(hypoallergenic)
             hypoallergenicErrorMsg = "Please select an option";
         } else {
             if (hypoallergenicError) {
@@ -518,11 +561,9 @@ export default class Main extends React.Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('handle submit called')
         const isValid = await this.validate();
         if (isValid) {
             this.addNew();
-            this.setState(initialState);
         }
     }
 
@@ -531,7 +572,6 @@ export default class Main extends React.Component {
         const isValid = this.validate();
         if (isValid) {
             this.editNew();
-            this.setState(initialState);
         }
     }
 
@@ -553,66 +593,35 @@ export default class Main extends React.Component {
                 </React.Fragment>
             );
         } else if (this.state.active === 'browse') {
-            if (!this.state.dataFiltered[0]) {
-                return (
-                    <React.Fragment>
-                        <Navigationbar
-                            setActive={this.setActive}
-                        />
-                        <Browse data={this.state.data}
-                            setActive={this.setActive}
-                            keywordSearch={this.state.keywordSearch}
-                            genderSearch={this.state.genderSearch}
-                            healthSearch={this.state.healthSearch}
-                            familySearch={this.state.familySearch}
-                            gteYearSearch={this.state.gteYearSearch}
-                            lteYearSearch={this.state.lteYearSearch}
-                            hypoallergenicSearch={this.state.hypoallergenicSearch}
-                            temperamentSearch={this.state.temperamentSearch}
-                            updateSearchCheckbox={this.updateSearchCheckbox}
-                            updateSearchFormField={this.updateSearchFormField}
-                            updateFormField={this.updateFormField}
-                            updateGender={this.updateGender}
-                            modal={this.state.modal}
-                            handleModal={this.handleModal}
-                            closeModal={this.closeModal}
-                            updateHypoallergenic={this.updateHypoallergenic}
-                            updateDog={this.updateDog}
+            return (
+                <React.Fragment>
+                    <Navigationbar
+                        setActive={this.setActive}
+                    />
+                    <Browse
+                        data={this.state.dataFiltered}
+                        setActive={this.setActive}
+                        keywordSearch={this.state.keywordSearch}
+                        genderSearch={this.state.genderSearch}
+                        healthSearch={this.state.healthSearch}
+                        familySearch={this.state.familySearch}
+                        gteYearSearch={this.state.gteYearSearch}
+                        lteYearSearch={this.state.lteYearSearch}
+                        hypoallergenicSearch={this.state.hypoallergenicSearch}
+                        temperamentSearch={this.state.temperamentSearch}
+                        updateSearchCheckbox={this.updateSearchCheckbox}
+                        updateSearchFormField={this.updateSearchFormField}
+                        updateFormField={this.updateFormField}
+                        updateGender={this.updateGender}
+                        handleModal={this.handleModal}
+                        closeModal={this.closeModal}
+                        modal={this.state.modal}
+                        updateHypoallergenic={this.updateHypoallergenic}
+                        updateDog={this.updateDog}
+                    />
+                </React.Fragment>
 
-                        />
-                    </React.Fragment>
-
-                )
-            } else {
-                return (
-                    <React.Fragment>
-                        <Navigationbar
-                            setActive={this.setActive}
-                        />
-                        <Browse data={this.state.dataFiltered}
-                            setActive={this.setActive}
-                            keywordSearch={this.state.keywordSearch}
-                            genderSearch={this.state.genderSearch}
-                            healthSearch={this.state.healthSearch}
-                            familySearch={this.state.familySearch}
-                            gteYearSearch={this.state.gteYearSearch}
-                            lteYearSearch={this.state.lteYearSearch}
-                            hypoallergenicSearch={this.state.hypoallergenicSearch}
-                            temperamentSearch={this.state.temperamentSearch}
-                            updateSearchCheckbox={this.updateSearchCheckbox}
-                            updateSearchFormField={this.updateSearchFormField}
-                            updateFormField={this.updateFormField}
-                            updateGender={this.updateGender}
-                            handleModal={this.handleModal}
-                            closeModal={this.closeModal}
-                            modal={this.state.modal}
-                            updateHypoallergenic={this.updateHypoallergenic}
-                            updateDog={this.updateDog}
-                        />
-                    </React.Fragment>
-
-                )
-            }
+            )
 
 
         } else if (this.state.active === 'add dog') {
@@ -642,6 +651,7 @@ export default class Main extends React.Component {
                         errors={this.state.errors}
                         handleSubmit={this.handleSubmit}
                         active={this.state.active}
+                        data={this.state.dataFiltered}
                     />
                 </React.Fragment>
             )
@@ -655,14 +665,14 @@ export default class Main extends React.Component {
                 </React.Fragment>
             )
         } else if (
-            // this.state.dogBeingEdited === true && 
             this.state.active === 'updateDog') {
             return (
                 <React.Fragment>
                     <Navigationbar
                         setActive={this.setActive}
                     />
-                    <UpdateDog data={this.state.data}
+                    <UpdateDog
+                        data={this.state.dataFiltered}
                         dogBeingEdited={this.state.dogBeingEdited}
                         editDogName={this.state.editDogName}
                         editBreed={this.state.editBreed}
@@ -686,9 +696,9 @@ export default class Main extends React.Component {
                         editNew={this.editNew}
                         modal={this.state.modal}
                         setActive={this.setActive}
-                        dogBeingDeleted={this.state.dogBeingDeleted}
+                        // dogBeingDeleted={this.state.dogBeingDeleted}
                         deleteAlert={this.deleteAlert}
-                        cancelDeleteAlert={this.cancelDeleteAlert}
+                        // cancelDeleteAlert={this.cancelDeleteAlert}
                         deleteDog={this.deleteDog}
                         active={this.state.active}
                     />
@@ -697,23 +707,65 @@ export default class Main extends React.Component {
         }
     }
 
-    setActive = (page) => {
-        console.log(this.state.data)
+    setActive = async (page) => {
+        if (page === 'browse') {
+            let response = await axios.get(this.url + 'dog_adoption');
+            this.setState({
+                active: page,
+                dataFiltered: response.data,
+                // dogBeingDeleted: false,
+                genderSearch: 'all',
+                keywordSearch: "",
+                gteYearSearch: "",
+                lteYearSearch: "",
+                hypoallergenicSearch: false,
+                temperamentSearch: [],
+                healthSearch: [],
+                familySearch: [],
+                errors: {},
+                editDogName: "",
+                editBreed: "",
+                editGender: "",
+                editDateOfBirth: "",
+                editTemperament: [],
+                editHealthStatus: [],
+                editFamilyStatus: [],
+                editHypoallergenic: "",
+                editToiletTrained: "",
+                editDescription: "",
+                editPictureUrl: "",
+                editOwnerName: "",
+                editEmail: "",
+            })
+        } else {
+            this.setState({
+                active: page,
+                // dogBeingDeleted: false,
+                genderSearch: 'all',
+                keywordSearch: "",
+                gteYearSearch: "",
+                lteYearSearch: "",
+                hypoallergenicSearch: false,
+                temperamentSearch: [],
+                healthSearch: [],
+                familySearch: [],
+                errors: {},
+                editDogName: "",
+                editBreed: "",
+                editGender: "",
+                editDateOfBirth: "",
+                editTemperament: [],
+                editHealthStatus: [],
+                editFamilyStatus: [],
+                editHypoallergenic: "",
+                editToiletTrained: "",
+                editDescription: "",
+                editPictureUrl: "",
+                editOwnerName: "",
+                editEmail: "",
+            })
+        }
 
-        this.setState({
-            active: page,
-            dogBeingDeleted: false,
-            dataFiltered: [],
-            genderSearch: 'all',
-            keywordSearch: "",
-            gteYearSearch: "",
-            lteYearSearch: "",
-            hypoallergenicSearch: false,
-            temperamentSearch: [],
-            healthSearch: [],
-            familySearch: [],
-            errors: {}
-        })
     }
 
     render() {

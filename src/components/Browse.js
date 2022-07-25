@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Row, Button, Card, Col, Badge, Modal, Accordion, Form } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Row, Button, Card, Col, Badge, Modal, Accordion, Form, Alert } from 'react-bootstrap';
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default function Browse(props) {
@@ -16,6 +16,17 @@ export default function Browse(props) {
                             <Accordion.Body>
                                 <Row>
                                     <Form>
+                                        {
+                                            props.data.length > 0 ?
+                                                <Alert variant="success">
+                                                    <Alert.Heading>{props.data.length} result(s) found</Alert.Heading>
+                                                </Alert>
+                                                :
+                                                <Alert variant="danger">
+                                                    <Alert.Heading>{props.data.length} results found</Alert.Heading>
+                                                </Alert>
+                                        }
+
                                         <div className="d-md-flex mb-sm-2 d-lg-block">
                                             <Form.Group className="mdSearchSm pe-md-5 pe-lg-0 mb-4" controlId="keywordSearch">
                                                 <Form.Label>Keyword Search</Form.Label>
@@ -33,7 +44,7 @@ export default function Browse(props) {
                                                     <Form.Control
                                                         type="text"
                                                         name="gteYearSearch"
-                                                        maxlength="4"
+                                                        maxLength="4"
                                                         placeholder="YYYY"
                                                         value={props.gteYearSearch}
                                                         onChange={props.updateSearchFormField} />
@@ -43,7 +54,7 @@ export default function Browse(props) {
                                                     <Form.Control
                                                         type="text"
                                                         name="lteYearSearch"
-                                                        maxlength="4"
+                                                        maxLength="4"
                                                         placeholder="YYYY"
                                                         value={props.lteYearSearch}
                                                         onChange={props.updateSearchFormField} />
@@ -216,10 +227,10 @@ export default function Browse(props) {
                                                     />
                                                     <Form.Check
                                                         inline
-                                                        label="Active"
-                                                        value="active"
+                                                        label="Laid-back"
+                                                        value="laid-back"
                                                         name="temperamentSearch"
-                                                        checked={props.temperamentSearch.includes('active')}
+                                                        checked={props.temperamentSearch.includes('laid-back')}
                                                         onChange={props.updateSearchCheckbox}
                                                         type={type}
                                                         id={`inline-${type}-24`}
@@ -248,15 +259,12 @@ export default function Browse(props) {
                                             ))}
                                         </Form.Group>
 
-
-
                                     </Form>
                                 </Row>
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>
                     </Col>
-
 
 
                     {/* CARDS */}

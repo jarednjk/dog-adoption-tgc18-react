@@ -44,14 +44,6 @@ export default function Home(props) {
                     </Row>
                 </Container>
             </div>
-            {/* <div className="">
-            <img className="hero" style={{objectFit: 'cover'}} src={require('../img/home.jpg')}></img>                
-                <h1>Adopt A Dog</h1>
-                <p>What are you waiting for?</p>
-                <Button variant="outline-primary" size="lg">Browse</Button>
-            </div> */}
-
-
         </React.Fragment>
     )
 }
