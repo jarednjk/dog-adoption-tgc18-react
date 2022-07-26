@@ -1,5 +1,7 @@
 # Adogpt
 
+![Responsive website](https://github.com/jarednjk/dog-adoption-tgc18-react/blob/main/src/img_readme/responsive_website.png)
+
 The live demo of the React frontend web application can be accessed [here](https://adogpt.netlify.app/).
 
 The backend API implementation can be accessed [here](https://github.com/jarednjk/dog-adoption-tgc18-express).
