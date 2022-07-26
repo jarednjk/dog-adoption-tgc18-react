@@ -111,9 +111,9 @@ The web application is hosted using [Netlify](https://www.netlify.com/), deploye
 
 ## Credits & Acknowledgement
 
-- [Canva]https://www.canva.com/ for the brand logo
+- [Canva](https://www.canva.com/) for the brand logo
 - [Google Fonts](https://fonts.google.com/) for the font
 - [Unsplash](https://unsplash.com/) for the dog images
 - [StackOverflow](https://stackoverflow.com/) for RegEx in form validation
 - [WebDevSimplified](https://www.youtube.com/watch?v=Gx35fMhDPWs) for loading spinner
-- [nanometre](https://github.com/nanometre) for his minimalistic design
+- [CreateMockup.com](https://www.createmockup.com/generate/) to generate responsive website mockup for README file
