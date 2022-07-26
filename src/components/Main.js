@@ -13,6 +13,9 @@ const initialState = {
     active: 'home',
     loaded: false,
     modal: null,
+    openModal: false,
+    dataFiltered: [],
+
     dogName: "",
     breed: "",
     gender: "",
@@ -43,7 +46,6 @@ const initialState = {
     editOwnerName: "",
     editEmail: "",
 
-    dataFiltered: [],
     keywordSearch: "",
     gteYearSearch: "",
     lteYearSearch: "",
@@ -72,7 +74,7 @@ const initialState = {
 
 export default class Main extends React.Component {
 
-    url = "https://8888-jarednjk-dogadoptiontgc-e2h0d227p1k.ws-us54.gitpod.io/";
+    url = "https://adogpt.herokuapp.com/";
 
     state = initialState;
 
@@ -150,13 +152,15 @@ export default class Main extends React.Component {
 
     handleModal = (dogId) => {
         this.setState({
-            modal: dogId
+            modal: dogId,
+            openModal: true
         })
     }
 
     closeModal = () => {
         this.setState({
-            modal: null
+            modal: null,
+            openModal: false
         })
     }
 
@@ -573,6 +577,9 @@ export default class Main extends React.Component {
         if (isValid) {
             this.editNew();
         }
+        this.setState({
+            openModal: true
+        })
     }
 
     renderContent() {
@@ -618,6 +625,7 @@ export default class Main extends React.Component {
                         modal={this.state.modal}
                         updateHypoallergenic={this.updateHypoallergenic}
                         updateDog={this.updateDog}
+                        openModal={this.state.openModal}
                     />
                 </React.Fragment>
 
@@ -736,6 +744,7 @@ export default class Main extends React.Component {
                 editPictureUrl: "",
                 editOwnerName: "",
                 editEmail: "",
+                openModal: false
             })
         } else {
             this.setState({
@@ -763,6 +772,7 @@ export default class Main extends React.Component {
                 editPictureUrl: "",
                 editOwnerName: "",
                 editEmail: "",
+                openModal: false
             })
         }
 

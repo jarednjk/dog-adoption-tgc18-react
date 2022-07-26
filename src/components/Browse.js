@@ -311,7 +311,7 @@ export default function Browse(props) {
 
                 </Row>
                 <Modal
-                    show={props.modal !== null}
+                    show={props.openModal !== false}
                     onHide={() => { props.closeModal() }}
                     size="lg"
                     centered

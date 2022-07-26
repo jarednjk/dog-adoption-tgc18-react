@@ -302,7 +302,7 @@ export default function UpdateDog(props) {
                                             <Button onClick={props.handleEdit} className="float-end mx-2" variant="warning">Update</Button>{' '}
                                             <Button onClick={props.deleteAlert} variant="danger">Delete</Button>
 
-                                
+
                                         </Form>
 
                                         <Modal
