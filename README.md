@@ -16,15 +16,16 @@ It is developed using the MERN (MongoDB, ExpressJS, React, NodeJS) stack.
 
 ### Target Audience
 
-It is targetd mainly at individual dog owners who wish to rehome their dogs or potential dog owners who are looking at adoption over buying.
+It is targeted mainly at individual dog owners who wish to rehome their dogs or potential dog owners who are looking at adoption over buying.
 
-Organisations usually already have their own dog adoption websites, but they are more than welcome to list with us to get more outreach.
+Organisations usually already have their own dog adoption websites, but they are more than welcome to list with Adogpt to get more outreach.
 
 ### Justification for the App
 
-Current dog owners might put their pet up for adoption for certain reasons such as anxiety issues, aggression issues, and housebreaking issues. 
+Unlike a pet adoption from an organisation, this web application helps to bridge the gap between current and potential dog owners.
 
-Future dog owners may prefer adopting from a dog owner over an organisation. Firstly, there is no adoption fee involved. Secondly, it is easier to find a well-trained pedigree breed from a dog owner than an organization like SPCA where most of the dogs are stray or abused. 
+Current dog owners might put their pet up for adoption for certain reasons such as anxiety issues, aggression issues, and housebreaking issues. However, they still deeply love their dogs and want to entrust it to someone whom they can trust.
 
-I noticed that certain pet adoption websites are too complicated and make it difficult for users to navigate. Thus, I have made this web application easy for users to gather important information on the dogs available for adoption. They can filter criterias like HDB-approved and hypoallergenic etc.
+Future dog owners may prefer adopting from a dog owner over an organisation. Firstly, there is no adoption fee involved. Secondly, it is easier to find a well-trained pedigree breed from a dog owner than an organization like SPCA where most of the dogs are stray or abused.
 
+Also, certain pet adoption websites are too complicated and make it difficult for users to navigate. Thus, I have made this web application easy for users to gather important information on the dogs available for adoption. They can filter criterias like HDB-approved and hypoallergenic depending on their needs.
