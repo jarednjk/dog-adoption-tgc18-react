@@ -107,6 +107,10 @@ All pages of the web application can be accessed via the navigation bar. The flo
 7. [Axios](https://github.com/axios/axios) to communicate with ExpressJS server for CRUD (Create, Read, Update, Delete) in database
 8. [sweetalert2](https://sweetalert2.github.io/) for alert pop-up to double-confirm whether users want to delete the dog listing
 
+## Testing
+
+Detailed test cases for the web application can be found [here]().
+
 ## Deployment
 
 The web application is hosted using [Netlify](https://www.netlify.com/), deployed directly from the main branch of this GitHub repository. For the detailed deployment steps, you may refer [here](https://www.netlify.com/blog/2016/09/29/a-step-by-step-guide-deploying-on-netlify/).
