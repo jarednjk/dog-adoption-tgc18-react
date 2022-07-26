@@ -99,11 +99,11 @@ All pages of the web application can be accessed via the navigation bar. The flo
 1. HTML5
 2. CSS3
 3. Javascript
-4. [React](https://reactjs.org/)
+4. [React](https://reactjs.org/) for frontend framework
 5. [React Bootstrap](https://react-bootstrap.github.io/) for styling website
 6. [Boostrap 5](https://getbootstrap.com/) for icons
 7. [Axios](https://github.com/axios/axios) to communicate with ExpressJS server for CRUD (Create, Read, Update, Delete) in database
-8. [sweetalert2](https://sweetalert2.github.io/)
+8. [sweetalert2](https://sweetalert2.github.io/) for alert pop-up to double-confirm whether users want to delete the dog listing
 
 ## Deployment
 
