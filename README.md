@@ -123,3 +123,4 @@ The web application is hosted using [Netlify](https://www.netlify.com/), deploye
 - [StackOverflow](https://stackoverflow.com/) for RegEx in form validation
 - [WebDevSimplified](https://www.youtube.com/watch?v=Gx35fMhDPWs) for loading spinner
 - [CreateMockup.com](https://www.createmockup.com/generate/) to generate responsive website mockup for README file
+- https://codepen.io/cerovac/pen/PXqLOW for dog breed JSON data
