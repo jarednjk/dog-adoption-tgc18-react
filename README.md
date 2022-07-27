@@ -98,6 +98,8 @@ All pages of the web application can be accessed via the navigation bar. The flo
 
 ## Technologies Used
 
+### Frontend Framework
+
 1. HTML5
 2. CSS3
 3. Javascript
@@ -106,6 +108,12 @@ All pages of the web application can be accessed via the navigation bar. The flo
 6. [Boostrap 5](https://getbootstrap.com/) for icons
 7. [Axios](https://github.com/axios/axios) to communicate with ExpressJS server for CRUD (Create, Read, Update, Delete) in database
 8. [sweetalert2](https://sweetalert2.github.io/) for alert pop-up to double-confirm whether users want to delete the dog listing
+
+### Backend Framework
+
+1. ExpressJS & NodeJS - minimalist web application framework to help manage servers and routes
+2. MongoDB & MongoDB Atlas - manage document-oriented information, store or retrieve information
+3. Heroku - cloud platform server for API
 
 ## Testing
 
