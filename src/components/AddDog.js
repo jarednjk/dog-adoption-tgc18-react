@@ -26,11 +26,13 @@ export default function AddDog(props) {
                                 <div style={{ color: 'red' }}>{props.errors.dogNameError}</div>
                             </Form.Group>
 
-                            <Form.Group className="mb-4" controlId='breed'>
-                                <Form.Label>Breed</Form.Label>
-                                <Form.Control name="breed" value={props.breed} onChange={props.updateFormField} />
-                                <div style={{ color: 'red' }}>{props.errors.breedError}</div>
-                            </Form.Group>
+                            <Form.Select name="breed" value={props.breed} onChange={props.updateFormField} placeholder="Select Dog Breed">
+                                <option key="placeHolder">--- SELECT DOG BREED ---</option>
+                                {props.breedArray.map(b =>
+                                    <option key={b} value={b.name}>{b.name}</option>
+                                )}
+                            </Form.Select>
+                            <div className="mb-4" style={{ color: 'red' }}>{props.errors.breedError}</div>
 
                             <Form.Group className="mb-4">
                                 <Form.Label>Gender</Form.Label>

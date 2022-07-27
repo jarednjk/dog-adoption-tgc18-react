@@ -16,6 +16,8 @@ const initialState = {
     openModal: false,
     dataFiltered: [],
 
+    editBreedArray: [],
+    breedArray: [],
     dogName: "",
     breed: "",
     gender: "",
@@ -80,9 +82,13 @@ export default class Main extends React.Component {
 
     async componentDidMount() {
         let response = await axios.get(this.url + 'dog_adoption');
+        let response2 = await axios.get('/dog_breeds.json');
+
         this.setState({
             data: response.data,
             dataFiltered: response.data,
+            breedArray: response2.data.dogBreeds,
+            editBreedArray: response2.data.dogBreeds,
             loaded: true
         })
     }
@@ -447,7 +453,7 @@ export default class Main extends React.Component {
             }
         }
 
-        if (!breed.match(/^[A-Za-z]+( [A-Za-z]+)*$/) && !this.state.editBreed.match(/^[A-Za-z]+( [A-Za-z]+)*$/)) {
+        if (!breed && !this.state.editBreed) {
             breedErrorMsg = "Please enter the dog breed";
         } else {
             if (breedError) {
@@ -677,6 +683,8 @@ export default class Main extends React.Component {
                         handleSubmit={this.handleSubmit}
                         active={this.state.active}
                         data={this.state.dataFiltered}
+                        breedArray={this.state.breedArray}
+
                     />
                 </React.Fragment>
             )
@@ -726,6 +734,7 @@ export default class Main extends React.Component {
                         // cancelDeleteAlert={this.cancelDeleteAlert}
                         deleteDog={this.deleteDog}
                         active={this.state.active}
+                        editBreedArray={this.state.editBreedArray}
                     />
                 </React.Fragment>
             )
