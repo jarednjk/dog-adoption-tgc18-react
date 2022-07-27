@@ -30,19 +30,18 @@ export default function UpdateDog(props) {
                                                 <div style={{ color: 'red' }}>{props.errors.dogNameError}</div>
                                             </Form.Group>
 
-                                            {/* <Form.Group className="mb-4" controlId='breed'>
+                                            <Form.Group className="mb-4">
                                                 <Form.Label>Breed</Form.Label>
-                                                <Form.Control name="editBreed" value={props.editBreed} onChange={props.updateFormField} />
+                                                <Form.Select name="editBreed" value={props.editBreed} onChange={props.updateFormField} placeholder="Select Dog Breed">
+                                                    <option key="placeHolder">--- SELECT DOG BREED ---</option>
+                                                    {props.editBreedArray.map(b =>
+                                                        <option key={b} value={b.name}>{b.name}</option>
+                                                    )}
+                                                </Form.Select>
                                                 <div style={{ color: 'red' }}>{props.errors.breedError}</div>
-                                            </Form.Group> */}
+                                            </Form.Group>
 
-                                            <Form.Select name="editBreed" value={props.editBreed} onChange={props.updateFormField} placeholder="Select Dog Breed">
-                                                <option key="placeHolder">--- SELECT DOG BREED ---</option>
-                                                {props.editBreedArray.map(b =>
-                                                    <option key={b} value={b.name}>{b.name}</option>
-                                                )}
-                                            </Form.Select>
-                                            <div className="mb-4" style={{ color: 'red' }}>{props.errors.breedError}</div>
+
 
                                             <Form.Group className="mb-4">
                                                 <Form.Label>Gender</Form.Label>
