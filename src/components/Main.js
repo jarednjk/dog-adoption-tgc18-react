@@ -81,7 +81,7 @@ export default class Main extends React.Component {
     async componentDidMount() {
         let response = await axios.get(this.url + 'dog_adoption');
         this.setState({
-            // data: response.data,
+            data: response.data,
             dataFiltered: response.data,
             loaded: true
         })
@@ -119,16 +119,16 @@ export default class Main extends React.Component {
             confirmButtonColor: '#dc3545',
             cancelButtonColor: '#0dcaf0',
             confirmButtonText: 'Confirm Delete'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire(
-                'Deleted!',
-                'Your data has been removed.',
-                'success',
-                this.deleteDog()
-              )
+                Swal.fire(
+                    'Deleted!',
+                    'Your data has been removed.',
+                    'success',
+                    this.deleteDog()
+                )
             }
-          })
+        })
     }
 
     // cancelDeleteAlert = () => {
@@ -261,6 +261,22 @@ export default class Main extends React.Component {
                 [e.target.name]: cloned
             });
         }
+    }
+
+    refreshSearch = async () => {
+        this.setState({
+            keywordSearch: "",
+            gteYearSearch: "",
+            lteYearSearch: "",
+            genderSearch: 'all',
+            hypoallergenicSearch: false,
+            healthSearch: [],
+            familySearch: [],
+            temperamentSearch: [],
+        })
+        await setTimeout(() => {
+            this.getSearchResults()
+        }, 100);
     }
 
     // Search for dog
@@ -606,6 +622,7 @@ export default class Main extends React.Component {
                         setActive={this.setActive}
                     />
                     <Browse
+                        refreshSearch={this.refreshSearch}
                         data={this.state.dataFiltered}
                         setActive={this.setActive}
                         keywordSearch={this.state.keywordSearch}
@@ -720,16 +737,16 @@ export default class Main extends React.Component {
             let response = await axios.get(this.url + 'dog_adoption');
             this.setState({
                 active: page,
-                dataFiltered: response.data,
+                data: response.data,
                 // dogBeingDeleted: false,
-                genderSearch: 'all',
-                keywordSearch: "",
-                gteYearSearch: "",
-                lteYearSearch: "",
-                hypoallergenicSearch: false,
-                temperamentSearch: [],
-                healthSearch: [],
-                familySearch: [],
+                // genderSearch: 'all',
+                // keywordSearch: "",
+                // gteYearSearch: "",
+                // lteYearSearch: "",
+                // hypoallergenicSearch: false,
+                // temperamentSearch: [],
+                // healthSearch: [],
+                // familySearch: [],
                 errors: {},
                 editDogName: "",
                 editBreed: "",
@@ -750,14 +767,14 @@ export default class Main extends React.Component {
             this.setState({
                 active: page,
                 // dogBeingDeleted: false,
-                genderSearch: 'all',
-                keywordSearch: "",
-                gteYearSearch: "",
-                lteYearSearch: "",
-                hypoallergenicSearch: false,
-                temperamentSearch: [],
-                healthSearch: [],
-                familySearch: [],
+                // genderSearch: 'all',
+                // keywordSearch: "",
+                // gteYearSearch: "",
+                // lteYearSearch: "",
+                // hypoallergenicSearch: false,
+                // temperamentSearch: [],
+                // healthSearch: [],
+                // familySearch: [],
                 errors: {},
                 editDogName: "",
                 editBreed: "",

@@ -13,6 +13,11 @@ code {
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+.nav-link {
+  font-family: 'Lato', sans-serif;
+}
 
 .swal2-icon.swal2-warning {
   border-color: #dc3545 !important;

@@ -16,7 +16,7 @@ export default function Browse(props) {
                             <Accordion.Body>
                                 <Row>
                                     <Form>
-                                        {
+                                        {/* {
                                             props.data.length > 0 ?
                                                 <Alert variant="success">
                                                     <Alert.Heading>{props.data.length} result(s) found</Alert.Heading>
@@ -25,7 +25,7 @@ export default function Browse(props) {
                                                 <Alert variant="danger">
                                                     <Alert.Heading>{props.data.length} results found</Alert.Heading>
                                                 </Alert>
-                                        }
+                                        } */}
 
                                         <div className="d-md-flex mb-sm-2 d-lg-block">
                                             <Form.Group className="mdSearchSm pe-md-5 pe-lg-0 mb-4" controlId="keywordSearch">
@@ -258,7 +258,7 @@ export default function Browse(props) {
                                                 </div>
                                             ))}
                                         </Form.Group>
-
+                                        <Button onClick={props.refreshSearch} className="float-end" variant="info">Refresh <i class="bi bi-arrow-clockwise"></i></Button>
                                     </Form>
                                 </Row>
                             </Accordion.Body>
@@ -269,6 +269,18 @@ export default function Browse(props) {
 
                     {/* CARDS */}
                     <Col lg={9}>
+                    <p className="text-center pb-2">
+                    {
+                        props.data.length > 0 ?
+                            <Alert variant="success" style={{height: '54px'}}>
+                                <p>{props.data.length} result(s) found</p>
+                            </Alert>
+                            :
+                            <Alert variant="danger" style={{height: '54px'}}>
+                                <p>{props.data.length} results found</p>
+                            </Alert>
+                    }
+                </p>
                         <Row className="g-5">
                             {props.data.map(dog => <React.Fragment key={dog._id}>
                                 <Col xs={12} md={6} lg={6} xl={4}>
