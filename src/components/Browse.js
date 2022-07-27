@@ -258,7 +258,7 @@ export default function Browse(props) {
                                                 </div>
                                             ))}
                                         </Form.Group>
-                                        <Button onClick={props.refreshSearch} className="float-end" variant="info">Refresh <i class="bi bi-arrow-clockwise"></i></Button>
+                                        <Button onClick={props.refreshSearch} className="float-end" variant="info">Reset <i class="bi bi-arrow-clockwise"></i></Button>
                                     </Form>
                                 </Row>
                             </Accordion.Body>
