@@ -109,7 +109,7 @@ All pages of the web application can be accessed via the navigation bar. The flo
 
 ## Testing
 
-Detailed test cases for the web application can be found [here](https://github.com/jarednjk/dog-adoption-tgc18-react/blob/main/src/img_readme/test_case.pdf).
+Detailed test cases for the web application can be found [here](https://github.com/jarednjk/dog-adoption-tgc18-react/blob/main/src/img_readme/adogpt_test_case.pdf).
 
 ## Deployment
 
