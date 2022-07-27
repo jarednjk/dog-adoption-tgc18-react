@@ -111,9 +111,9 @@ All pages of the web application can be accessed via the navigation bar. The flo
 
 ### Backend Framework
 
-1. ExpressJS & NodeJS - minimalist web application framework to help manage servers and routes
-2. MongoDB & MongoDB Atlas - manage document-oriented information, store or retrieve information
-3. Heroku - cloud platform server for API
+1. [ExpressJS](https://expressjs.com/) & [NodeJS](https://nodejs.org/en/) - minimalist web application framework to help manage servers and routes
+2. [MongoDB & MongoDB Atlas](https://www.mongodb.com/) - manage document-oriented information, store or retrieve information
+3. [Heroku](https://id.heroku.com/login) - cloud platform server for API
 
 ## Testing
 
